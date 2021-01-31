@@ -1,9 +1,9 @@
 import express from 'express';
 
-import v1API from './v1/v1.api';
+import clothesAPI from './clothes.api';
 
 const router: express.Router = express.Router();
 
-router.use('/v1', v1API);
+router.use('/', clothesAPI);
 
 export default router;

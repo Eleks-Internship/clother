@@ -1,7 +1,7 @@
 import express from 'express';
 import bodyParser from 'body-parser';
-import APIService from '../services/api.service';
-import ClothesService from '../services/clothes/clothes.service';
+import APIService from '../../services/api.service';
+import ClothesService from '../../services/clothes/clothes.service';
 
 const router: express.Router = express.Router();
 
