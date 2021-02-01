@@ -21,4 +21,11 @@ router.post('/clothes', async (req: express.Request, res: express.Response) => {
     APIService.processingOnAPIOfDataModels({ req, res, method: clothesService.create(req.body), dataError: null});
 });
 
+router.put('/clothes', async (req: express.Request, res: express.Response) => {
+    if (!req.body) return res.sendStatus(400);
+
+    const clothesService: ClothesService = new ClothesService();
+    APIService.processingOnAPIOfDataModels({ req, res, method: clothesService.update({ _id: new ObjectID(req.body.id), data: { name: req.body.name, photoName: req.body.photoName, urlForBuy: req.body.urlForBuy } }), dataError: null});
+});
+
 export default router;
