@@ -51,4 +51,22 @@ export default abstract class Database<T> {
             });
         });
     }
+
+    protected update(info: { _id: ObjectID, data: any}): Promise<boolean> {
+        return new Promise<boolean>((resolve, reject) => {
+            Database.connect().then(client => {
+                client.db(this.database).collection(this.collection).findOneAndUpdate({
+                    _id: info._id
+                }, {'$set': info.data}, (error: any, data: any) => {
+                    if (!error) resolve(data ? true : false);
+                    else reject(error);
+                });
+
+                client.close();
+            }).catch(error => {
+                resolve(false);
+                reject(error);
+            });
+        });
+    }
 }
