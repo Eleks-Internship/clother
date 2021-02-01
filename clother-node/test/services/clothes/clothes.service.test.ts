@@ -43,4 +43,9 @@ describe('Test service clothes', () => {
         const clothesService: ClothesService = new ClothesService("clothes-test");
         expect(await clothesService.update({ _id, data: { name, photoName, urlForBuy } })).eql(true);
     });
+
+    it('delete', async () => {
+        const clothesService: ClothesService = new ClothesService("clothes-test");
+        expect(await clothesService.delete(_id)).to.eql(true);
+    });
 });
