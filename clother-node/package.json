@@ -24,6 +24,7 @@
     "@types/mongodb": "^3.6.3",
     "@types/winston": "^2.4.4",
     "chai": "^4.2.0",
+    "chai-http": "^4.3.0",
     "mocha": "^8.2.1",
     "ts-node": "^9.1.1",
     "typescript": "^4.1.3"
