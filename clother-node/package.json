@@ -10,8 +10,8 @@
     "lint": "tslint --project tsconfig.json",
     "test": "mocha --require ts-node/register --watch-extensions ts **/*.test.ts --timeout 3000",
     "test-ci": "npm run test-database && npm run test-services",
-    "test-database": "mocha --require ts-node/register --watch-extensions ts clother-node/test/database/**/*.test.ts --timeout 3000",
-    "test-services": "mocha --require ts-node/register --watch-extensions ts clother-node/test/services/**/*.test.ts --timeout 3000"
+    "test-database": "mocha --require ts-node/register --watch-extensions ts test/database/**/*.test.ts --timeout 3000",
+    "test-services": "mocha --require ts-node/register --watch-extensions ts test/services/**/*.test.ts --timeout 3000"
   },
   "author": "",
   "license": "ISC",
@@ -30,6 +30,7 @@
     "chai-http": "^4.3.0",
     "mocha": "^8.2.1",
     "ts-node": "^9.1.1",
+    "tslint": "^6.1.3",
     "typescript": "^4.1.3"
   }
 }
