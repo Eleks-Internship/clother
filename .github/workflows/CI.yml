@@ -21,7 +21,10 @@ jobs:
       uses: actions/setup-node@v1
       with:
         node-version: ${{ matrix.node-version }}
+    - run: cd clother-angular && npm ci
     - run: cd clother-angular && npm run test:prod
     - run: cd clother-angular && npm run lint
+
+    - run: cd clother-node && npm ci
     - run: cd clother-node && npm run test
     - run: cd clother-node && npm run lint
