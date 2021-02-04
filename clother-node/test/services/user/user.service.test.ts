@@ -5,10 +5,10 @@ import User from '../../../src/interface/object/user';
 import { ObjectID } from 'mongodb';
 
 describe('Test service user', () => {
-    const firstName: string = "firstName";
-    const lastName: string = "lastName";
-    const email: string = "email@email.com";
-    const password: string = "password";
+    let firstName: string = "firstName";
+    let lastName: string = "lastName";
+    let email: string = "email@email.com";
+    let password: string = "password";
     let _id: ObjectID;
 
     it('create', async () => {
@@ -34,5 +34,15 @@ describe('Test service user', () => {
         } else {
             expect(user).to.not.eql(null);
         }
+    });
+
+    it('update', async () => {
+        firstName = "fistNameUpdate"
+        lastName = "lastNameUpdate";
+        email = "emailUpdate@email.com";
+        password = "passwordUpdate";
+
+        const userService: UserService = new UserService("clothes-test");
+        expect(await userService.update({ _id, data: { firstName, lastName, email, password } })).eql(true);
     });
 });
