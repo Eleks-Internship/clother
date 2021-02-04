@@ -44,5 +44,22 @@ describe('Test database user', () => {
                 chai.expect(res.body).to.not.eql(null);
             }
         });
-    })
+    });
+
+    it('put', () => {
+        return chai.request('http://' + server +':' + port + '/api').put('/v1/users').send({
+            id: _id,
+            firstName,
+            lastName,
+            email,
+            password
+        }).then(res => {
+            chai.expect(res.status).to.eql(200);
+            if (res.body) {
+                chai.expect(res.body.data).to.eql(true);
+            } else {
+                chai.expect(res.body).to.not.eql(null);
+            }
+        });
+    });
 });
