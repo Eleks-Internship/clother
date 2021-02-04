@@ -69,4 +69,22 @@ export default abstract class Database<T> {
             });
         });
     }
+
+    protected delete(_id: ObjectID): Promise<boolean> {
+        return new Promise<boolean>((resolve, reject) => {
+            Database.connect().then(client => {
+                client.db(this.database).collection(this.collection).deleteOne({
+                    _id
+                }, (error: any, data: any) => {
+                    if (!error) resolve(data ? true : false);
+                    else reject(error);
+                });
+
+                client.close();
+            }).catch(error => {
+                resolve(false);
+                reject(error);
+            });
+        });
+    }
 }

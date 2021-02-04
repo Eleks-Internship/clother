@@ -43,4 +43,9 @@ describe('Test database clothes', () => {
         const clothesDatabase: ClothesDatabase = new ClothesDatabase("clothes-test");
         expect(await clothesDatabase.update({ _id, data: { name, photoName, urlForBuy } })).eql(true);
     });
+
+    it('delete', async () => {
+        const clothesDatabase: ClothesDatabase = new ClothesDatabase("clothes-test");
+        expect(await clothesDatabase.delete(_id)).to.eql(true);
+    });
 });

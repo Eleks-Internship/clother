@@ -27,7 +27,7 @@ describe('Test api clothes', () => {
                 chai.expect(res.body.data.urlForBuy).to.eql(urlForBuy);
                 _id = res.body.data._id;
             } else {
-                chai.expect(res.body.data).to.not.eql(null);
+                chai.expect(res.body).to.not.eql(null);
             }
         });
     });
@@ -39,9 +39,8 @@ describe('Test api clothes', () => {
                 chai.expect(res.body.data.name).to.eql(name);
                 chai.expect(res.body.data.photoName).to.eql(photoName);
                 chai.expect(res.body.data.urlForBuy).to.eql(urlForBuy);
-                _id = res.body.data._id;
             } else {
-                chai.expect(res.body.data).to.not.eql(null);
+                chai.expect(res.body).to.not.eql(null);
             }
         });
     });
@@ -57,7 +56,18 @@ describe('Test api clothes', () => {
             if (res.body) {
                 chai.expect(res.body.data).to.eql(true);
             } else {
-                chai.expect(res.body.data).to.not.eql(false);
+                chai.expect(res.body).to.not.eql(false);
+            }
+        });
+    });
+
+    it('delete', () => {
+        return chai.request('http://' + server +':' + port + '/api').delete('/v1/clothes/' + _id).then(res => {
+            chai.expect(res.status).to.eql(200);
+            if (res.body) {
+                chai.expect(res.body.data).to.eql(true);
+            } else {
+                chai.expect(res.body).to.not.eql(null);
             }
         });
     });

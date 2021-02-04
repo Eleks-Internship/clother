@@ -28,4 +28,9 @@ router.put('/clothes', async (req: express.Request, res: express.Response) => {
     APIService.processingOnAPIOfDataModels({ req, res, method: clothesService.update({ _id: new ObjectID(req.body.id), data: { name: req.body.name, photoName: req.body.photoName, urlForBuy: req.body.urlForBuy } }), dataError: null});
 });
 
+router.delete('/clothes/:id', async (req: express.Request, res: express.Response) => {
+    const clothesService: ClothesService = new ClothesService();
+    APIService.processingOnAPIOfDataModels({ req, res, method: clothesService.delete(new ObjectID(req.params.id)), dataError: false});
+});
+
 export default router;
