@@ -22,9 +22,9 @@ describe('Test database user', () => {
         }).then(res => {
             chai.expect(res.status).to.eql(200);
             if (res.body) {
-                chai.expect(res.body.data.firstName).to.eql(firstName);
-                chai.expect(res.body.data.lastName).to.eql(lastName);
-                chai.expect(res.body.data.email).to.eql(email);
+                chai.expect(res.body.data).to.not.eql(null);
+                chai.expect(res.body.data).to.not.eql('');
+                chai.expect(res.body.data).to.be.a('string');
             } else {
                 chai.expect(res.body).to.not.eql(null);
             }
