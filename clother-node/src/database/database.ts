@@ -1,4 +1,5 @@
 import { MongoClient, ObjectID } from 'mongodb';
+import LogWithoutDatabaseService from '../services/server-info/log/log_without_database.service';
 
 import { mongodbUrl } from './database_info';
 
@@ -21,13 +22,22 @@ export default abstract class Database<T> {
                 info.dateOfCreation = new Date(new Date().toISOString());
                 return client;
             }).then(client => {
-                client.db(this.database).collection(this.collection).insertOne(info, (error: any, data: any) => {
-                    if (!error) resolve(data.ops[0] ?? null);
-                    else reject(error);
+                client.db(this.database).collection(this.collection).insertOne(info, (error: object, data: any) => {
+                    resolve(data.ops[0] ?? null);
+
+                    if (error) {
+                        const logWithoutDatabaseService: LogWithoutDatabaseService = new LogWithoutDatabaseService();
+                        logWithoutDatabaseService.logError({ message: error });
+
+                        reject(error);
+                    }
                 });
 
                 client.close();
             }).catch(error => {
+                const logWithoutDatabaseService: LogWithoutDatabaseService = new LogWithoutDatabaseService();
+                logWithoutDatabaseService.logError({ message: error });
+
                 resolve(null);
                 reject(error);
             });
@@ -39,13 +49,22 @@ export default abstract class Database<T> {
             Database.connect().then(client => {
                 client.db(this.database).collection(this.collection).findOne({
                     _id
-                }, (error: any, data: any) => {
-                    if (!error) resolve(data ?? null);
-                    else reject(error);
+                }, (error: object, data: any) => {
+                    resolve(data ?? null);
+
+                    if (error) {
+                        const logWithoutDatabaseService: LogWithoutDatabaseService = new LogWithoutDatabaseService();
+                        logWithoutDatabaseService.logError({ message: error });
+
+                        reject(error);
+                    }
                 });
 
                 client.close();
             }).catch(error => {
+                const logWithoutDatabaseService: LogWithoutDatabaseService = new LogWithoutDatabaseService();
+                logWithoutDatabaseService.logError({ message: error });
+
                 resolve(null);
                 reject(error);
             });
@@ -57,13 +76,22 @@ export default abstract class Database<T> {
             Database.connect().then(client => {
                 client.db(this.database).collection(this.collection).findOneAndUpdate({
                     _id: info._id
-                }, {'$set': info.data}, (error: any, data: any) => {
-                    if (!error) resolve(data ? true : false);
-                    else reject(error);
+                }, {'$set': info.data}, (error: object, data: any) => {
+                    resolve(data ? true : false);
+
+                    if (error) {
+                        const logWithoutDatabaseService: LogWithoutDatabaseService = new LogWithoutDatabaseService();
+                        logWithoutDatabaseService.logError({ message: error });
+
+                        reject(error);
+                    }
                 });
 
                 client.close();
             }).catch(error => {
+                const logWithoutDatabaseService: LogWithoutDatabaseService = new LogWithoutDatabaseService();
+                logWithoutDatabaseService.logError({ message: error });
+
                 resolve(false);
                 reject(error);
             });
@@ -75,13 +103,22 @@ export default abstract class Database<T> {
             Database.connect().then(client => {
                 client.db(this.database).collection(this.collection).deleteOne({
                     _id
-                }, (error: any, data: any) => {
-                    if (!error) resolve(data ? true : false);
-                    else reject(error);
+                }, (error: object, data: any) => {
+                    resolve(data ? true : false);
+
+                    if (error) {
+                        const logWithoutDatabaseService: LogWithoutDatabaseService = new LogWithoutDatabaseService();
+                        logWithoutDatabaseService.logError({ message: error });
+
+                        reject(error);
+                    }
                 });
 
                 client.close();
             }).catch(error => {
+                const logWithoutDatabaseService: LogWithoutDatabaseService = new LogWithoutDatabaseService();
+                logWithoutDatabaseService.logError({ message: error });
+
                 resolve(false);
                 reject(error);
             });
