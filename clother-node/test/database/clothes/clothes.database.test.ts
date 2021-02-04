@@ -5,9 +5,9 @@ import ClothesDatabase from '../../../src/database/clothes/clothes.database';
 import Clothes from '../../../src/interface/object/clothes';
 
 describe('Test database clothes', () => {
-    const name: string = "test"
-    const photoName: string = "test";
-    const urlForBuy: string = "test";
+    let name: string = "test"
+    let photoName: string = "test";
+    let urlForBuy: string = "test";
     let _id: ObjectID;
 
     it('create', async () => {
@@ -33,5 +33,14 @@ describe('Test database clothes', () => {
         } else {
             expect(clothes).to.not.eql(null);
         }
+    });
+
+    it('update', async () => {
+        name = "testUpdate"
+        photoName = "testUpdate";
+        urlForBuy = "testUpdate";
+
+        const clothesDatabase: ClothesDatabase = new ClothesDatabase("clothes-test");
+        expect(await clothesDatabase.update({ _id, data: { name, photoName, urlForBuy } })).eql(true);
     });
 });

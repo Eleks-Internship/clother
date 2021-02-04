@@ -2,9 +2,10 @@ import { ObjectID } from "mongodb";
 import ClothesDatabase from "../../database/clothes/clothes.database";
 import Create from "../../interface/class/create";
 import Get from "../../interface/class/get";
+import Update from "../../interface/class/update";
 import Clothes from "../../interface/object/clothes";
 
-export default class ClothesService implements Create<Clothes>, Get<Clothes> {
+export default class ClothesService implements Create<Clothes>, Get<Clothes>, Update {
     private readonly clothesDatabase: ClothesDatabase;
 
     constructor(collection: string = "clothes") {
@@ -17,5 +18,9 @@ export default class ClothesService implements Create<Clothes>, Get<Clothes> {
 
     public async get(_id: ObjectID): Promise<Clothes | null> {
         return this.clothesDatabase.get(_id);
+    }
+
+    public async update(info: { _id: ObjectID, data: { name: string, photoName: string, urlForBuy: string } }): Promise<boolean> {
+        return this.clothesDatabase.update(info);
     }
 }

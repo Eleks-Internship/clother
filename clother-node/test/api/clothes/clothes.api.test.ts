@@ -45,4 +45,20 @@ describe('Test api clothes', () => {
             }
         });
     });
+
+    it('put', () => {
+        return chai.request('http://' + server +':' + port + '/api').put('/v1/clothes').send({
+            id: _id,
+            name,
+            photoName,
+            urlForBuy
+        }).then(res => {
+            chai.expect(res.status).to.eql(200);
+            if (res.body) {
+                chai.expect(res.body.data).to.eql(true);
+            } else {
+                chai.expect(res.body.data).to.not.eql(false);
+            }
+        });
+    });
 });
