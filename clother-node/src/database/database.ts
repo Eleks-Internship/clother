@@ -33,4 +33,22 @@ export default abstract class Database<T> {
             });
         });
     }
+
+    protected get(_id: ObjectID): Promise<T | null> {
+        return new Promise<T | null>((resolve, reject) => {
+            Database.connect().then(client => {
+                client.db(this.database).collection(this.collection).findOne({
+                    _id
+                }, (error: any, data: any) => {
+                    if (!error) resolve(data ?? null);
+                    else reject(error);
+                });
+
+                client.close();
+            }).catch(error => {
+                resolve(null);
+                reject(error);
+            });
+        });
+    }
 }
