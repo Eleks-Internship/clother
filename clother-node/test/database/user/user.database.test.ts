@@ -3,6 +3,7 @@ import { ObjectID } from 'mongodb';
 
 import UserDatabase from '../../../src/database/user/user.database';
 import User from '../../../src/interface/object/user';
+import CollectionDatabase from '../../../src/database/collection/collection.database';
 
 describe('Test database user', () => {
     let firstName: string = "firstName";
@@ -44,7 +45,10 @@ describe('Test database user', () => {
         email = "emailUpdate@email.com";
         password = "passwordUpdate";
 
-        const userDatabase: UserDatabase = new UserDatabase("clothes-test");
+        const userDatabase: UserDatabase = new UserDatabase("user-test");
+
+        CollectionDatabase.deleteUser();
+
         expect(await userDatabase.update({ _id, data: { firstName, lastName, email, password } })).eql(true);
     });
 });

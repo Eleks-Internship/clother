@@ -2,12 +2,13 @@ import { expect } from 'chai';
 
 import UserService from '../../../src/services/user/user.service';
 import User from '../../../src/interface/object/user';
+import CollectionDatabase from '../../../src/database/collection/collection.database';
 import { ObjectID } from 'mongodb';
 
 describe('Test service user', () => {
     let firstName: string = "firstName";
     let lastName: string = "lastName";
-    let email: string = "email@email.com";
+    let email: string = "email3@email.com";
     let password: string = "password";
     let _id: ObjectID;
 
@@ -42,7 +43,10 @@ describe('Test service user', () => {
         email = "emailUpdate@email.com";
         password = "passwordUpdate";
 
-        const userService: UserService = new UserService("clothes-test");
+        const userService: UserService = new UserService("user-test");
+
+        CollectionDatabase.deleteUser();
+
         expect(await userService.update({ _id, data: { firstName, lastName, email, password } })).eql(true);
     });
 });

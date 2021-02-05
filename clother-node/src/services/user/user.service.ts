@@ -17,6 +17,9 @@ export default class UserService implements Create<User>, Get<User>, Update {
         const passwordService: PasswordService = new PasswordService(info.password);
         const passwordHash: string = passwordService.hashPassword();
 
+        const emailIsBusy: boolean = !!await this.userDatabase.getByKeys({ email: info.email });
+        if (emailIsBusy) return null;
+
         const user: User | null = await this.userDatabase.create({ firstName: info.firstName, lastName: info.lastName, email: info.email, password: passwordHash });
         delete user?.password;
 
