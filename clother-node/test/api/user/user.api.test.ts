@@ -1,6 +1,7 @@
 import chai from 'chai';
 import chaiHttp from 'chai-http';
 import 'mocha';
+import { ObjectID } from 'mongodb';
 
 chai.use(chaiHttp);
 
@@ -12,6 +13,7 @@ describe('Test database user', () => {
     const lastName: string = "lastName";
     const email: string = "email@email.com";
     const password: string = "password";
+    let _id: ObjectID = new ObjectID("601beeb6964b0a126801b7ff");
 
     it('post', async () => {
         return chai.request('http://' + server +':' + port + '/api').post('/v1/users').send({
@@ -25,6 +27,19 @@ describe('Test database user', () => {
                 chai.expect(res.body.data).to.not.eql(null);
                 chai.expect(res.body.data).to.not.eql('');
                 chai.expect(res.body.data).to.be.a('string');
+            } else {
+                chai.expect(res.body).to.not.eql(null);
+            }
+        });
+    });
+
+    it('get user', async () => {
+        return chai.request('http://' + server +':' + port + '/api').get('/v1/users/' + _id).then(res => {
+            chai.expect(res.status).to.eql(200);
+            if (res.body) {
+                chai.expect(res.body.data.firstName).to.eql(firstName);
+                chai.expect(res.body.data.lastName).to.eql(lastName);
+                chai.expect(res.body.data.email).to.eql(email);
             } else {
                 chai.expect(res.body).to.not.eql(null);
             }
