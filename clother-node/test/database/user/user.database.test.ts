@@ -5,10 +5,10 @@ import UserDatabase from '../../../src/database/user/user.database';
 import User from '../../../src/interface/object/user';
 
 describe('Test database user', () => {
-    const firstName: string = "firstName";
-    const lastName: string = "lastName";
-    const email: string = "email@email.com";
-    const password: string = "password";
+    let firstName: string = "firstName";
+    let lastName: string = "lastName";
+    let email: string = "email@email.com";
+    let password: string = "password";
     let _id: ObjectID;
 
     it('create', async () => {
@@ -36,5 +36,15 @@ describe('Test database user', () => {
         } else {
             expect(user).to.not.eql(null);
         }
+    });
+
+    it('update', async () => {
+        firstName = "fistNameUpdate"
+        lastName = "lastNameUpdate";
+        email = "emailUpdate@email.com";
+        password = "passwordUpdate";
+
+        const userDatabase: UserDatabase = new UserDatabase("clothes-test");
+        expect(await userDatabase.update({ _id, data: { firstName, lastName, email, password } })).eql(true);
     });
 });

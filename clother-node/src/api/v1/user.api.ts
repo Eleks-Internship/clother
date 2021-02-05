@@ -32,4 +32,16 @@ router.get('/users/:id', (req: express.Request, res: express.Response) => {
     }
 });
 
+router.put('/users', (req: express.Request, res: express.Response) => {
+    if (!req.body) return res.status(400).send({ data: null, message: 'user did not enter data in the form' });
+
+    const userService: UserService = new UserService();
+
+    try {
+        APIService.processingOnAPIOfDataModels({ req, res, method: userService.update({ _id: new ObjectID(req.body.id), data: { firstName: req.body.firstName, lastName:req.body.lastName, email: req.body.email, password: req.body.password } }), dataError: null });
+    } catch (error) {
+        APIService.catchError({ res, req, error, dataError: null });
+    }
+});
+
 export default router;
