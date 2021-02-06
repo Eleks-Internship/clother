@@ -2,11 +2,12 @@ import { ObjectID } from "mongodb";
 import UserDatabase from "../../database/user/user.database";
 import Create from "../../interface/class/create";
 import Get from "../../interface/class/get";
+import GetList from "../../interface/class/get_list";
 import Update from "../../interface/class/update";
 import User from "../../interface/object/user";
 import PasswordService from "./password.service";
 
-export default class UserService implements Create<User>, Get<User>, Update {
+export default class UserService implements Create<User>, Get<User>, GetList<User>, Update {
     private readonly userDatabase: UserDatabase;
 
     constructor(collection: string = "user") {
@@ -31,6 +32,10 @@ export default class UserService implements Create<User>, Get<User>, Update {
         delete user?.password;
 
         return user;
+    }
+
+    public getList(): Promise<User[]> {
+        return this.userDatabase.getList();
     }
 
     public update(info: { _id: ObjectID, data: { firstName: string, lastName: string, email: string, password: string } }): Promise<boolean> {
