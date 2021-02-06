@@ -1,4 +1,6 @@
+import User from "../../interface/object/user";
 import LogWithDatabaseService from "../server-info/log/log_without_database.service";
+import PasswordService from "../user/password.service";
 import UserService from "../user/user.service";
 import AuthService from "./auth.service";
 
@@ -20,5 +22,18 @@ export default class LoginService {
             const authService: AuthService = new AuthService();
             return authService.createToken(user._id.toString());
         });
+    }
+
+    public async getToken(info: { email: string, password: string }): Promise<string> {
+        const passwordService: PasswordService = new PasswordService(info.password)
+        const userService: UserService = new UserService(this.collectionUser);
+
+        const user: User | null = await userService.getByEmail({ email: info.email });
+
+        if (user?.password && passwordService.verificatePassword(user?.password)) {
+            const authService: AuthService = new AuthService();
+            return authService.createToken(user._id.toHexString());
+        }
+        return '';
     }
 }
