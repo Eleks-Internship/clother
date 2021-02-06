@@ -37,6 +37,12 @@ describe('Test service user', () => {
         }
     });
 
+    it('get list', async () => {
+        const userDatabase: UserService = new UserService("user-test");
+        const userList: User[] = await userDatabase.getList();
+        expect(userList.length).to.not.eql(0);
+    });
+
     it('update', async () => {
         firstName = "fistNameUpdate"
         lastName = "lastNameUpdate";
