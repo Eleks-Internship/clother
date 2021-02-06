@@ -8,15 +8,11 @@ import DatabaseObject from "../database_object";
 import { dbClothes } from "../database_info";
 
 export default class ClothesDatabase extends DatabaseObject<Clothes> implements Create<Clothes>, Get<Clothes>, Update, Delete {
-    private static collection: string;
-
     constructor(collection: string = "clothes") {
         super({ database: dbClothes, collection });
-
-        ClothesDatabase.collection = collection;
     }
 
-    public create(info: { name: string, photoName: string, urlForBuy: string }): Promise<Clothes | null> {
+    public create(info: { name: string, photoName: string, urlForBuy: string , user: { _id: ObjectID }}): Promise<Clothes | null> {
         return super.create(info);
     }
 
