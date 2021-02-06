@@ -11,6 +11,8 @@ import { SignUpComponent } from './pages/sign-up/sign-up.component';
 import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { SignUpFormComponent } from './components/sign-up-form/sign-up-form.component';
+import { LoginComponent } from './pages/login/login.component';
+import { LoginFormComponent } from './components/login-form/login-form.component';
 
 @NgModule({
   declarations: [
@@ -19,6 +21,8 @@ import { SignUpFormComponent } from './components/sign-up-form/sign-up-form.comp
     HeaderComponent,
     FooterComponent,
     SignUpFormComponent,
+    LoginComponent,
+    LoginFormComponent,
   ],
   imports: [
     BrowserModule,
