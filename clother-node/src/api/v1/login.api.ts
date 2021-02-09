@@ -18,7 +18,17 @@ router.post('/login/facebook', (req: express.Request, res: express.Response) => 
     const loginService: LoginService = new LoginService();
 
     try {
-        APIService.processingOnAPIOfDataModels({req, res, method: loginService.getTokenThanksByFaceebook(req.body), dataError: ''});
+        APIService.processingOnAPIOfDataModels({req, res, method: loginService.getTokenBySocialMedia(req.body), dataError: ''});
+    } catch(error) {
+        APIService.catchError(error);
+    }
+});
+
+router.post('/login/google', (req: express.Request, res: express.Response) => {
+    const loginService: LoginService = new LoginService();
+
+    try {
+        APIService.processingOnAPIOfDataModels({req, res, method: loginService.getTokenBySocialMedia(req.body), dataError: ''});
     } catch(error) {
         APIService.catchError(error);
     }
