@@ -32,8 +32,22 @@ export default class LoginService {
 
         if (user?.password && passwordService.verificatePassword(user?.password)) {
             const authService: AuthService = new AuthService();
-            return authService.createToken(user._id.toHexString());
+            return authService.createToken(user._id.toString());
         }
+        return '';
+    }
+
+    public async getTokenThanksByFaceebook(info: { lastName: string, firstName: string, email: string }) {
+        const userService: UserService = new UserService(this.collectionUser);
+        const authService: AuthService = new AuthService();
+
+        let user: User | null = await userService.getByEmail({ email: info.email });
+
+        if (!user) {
+            user = await userService.create({ firstName: info.firstName, lastName: info.lastName, email: info.email, password: ''})
+        }
+
+        if (user) return authService.createToken(user._id.toString());
         return '';
     }
 }
