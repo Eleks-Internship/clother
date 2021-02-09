@@ -13,6 +13,7 @@ import { FooterComponent } from './components/footer/footer.component';
 import { SignUpFormComponent } from './components/sign-up-form/sign-up-form.component';
 import { LoginComponent } from './pages/login/login.component';
 import { LoginFormComponent } from './components/login-form/login-form.component';
+import { LoginBySocialMediaComponent } from './components/login-by-social-media/login-by-social-media.component';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { LoginFormComponent } from './components/login-form/login-form.component
     SignUpFormComponent,
     LoginComponent,
     LoginFormComponent,
+    LoginBySocialMediaComponent,
   ],
   imports: [
     BrowserModule,
