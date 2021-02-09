@@ -23,6 +23,16 @@ describe('Test service login', () => {
 
         const token: string = await loginService.getToken({ email, password });
 
+        expect(token).to.not.eql(null);
+        expect(token).to.not.eql('');
+        expect(token).to.be.a('string');
+    });
+
+    it('get token thanks by facebook', async () => {
+        const loginService: LoginService = new LoginService("user-test");
+
+        const token: string = await loginService.getTokenThanksByFaceebook({ firstName, lastName, email });
+
         CollectionDatabase.deleteUser();
 
         expect(token).to.not.eql(null);
