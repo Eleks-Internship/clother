@@ -22,6 +22,16 @@ router.post('/users', (req: express.Request, res: express.Response) => {
     }
 });
 
+router.get('/users', (req: express.Request, res: express.Response) => {
+    const userService: UserService = new UserService();
+
+    try {
+        APIService.processingOnAPIOfDataModels({ req, res, method: userService.getList(), dataError: null });
+    } catch (error) {
+        APIService.catchError({ res, req, error, dataError: null });
+    }
+});
+
 router.get('/users/:id', (req: express.Request, res: express.Response) => {
     const userService: UserService = new UserService();
 

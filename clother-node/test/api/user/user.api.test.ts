@@ -44,6 +44,17 @@ describe('Test database user', () => {
         });
     });
 
+    it('get list of users', async () => {
+        return chai.request('http://' + server +':' + port + '/api').get('/v1/users/' + _id).then(res => {
+            chai.expect(res.status).to.eql(200);
+            if (res.body) {
+                chai.expect(res.body.data.length).to.not.eql(0);
+            } else {
+                chai.expect(res.body).to.not.eql(null);
+            }
+        });
+    });
+
     it('put', () => {
         return chai.request('http://' + server +':' + port + '/api').put('/v1/users').send({
             id: _id,
