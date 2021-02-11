@@ -11,9 +11,8 @@ router.use(bodyParser.json());
 
 router.post('/looks', async (req: express.Request, res: express.Response) => {
     const lookService: LookService = new LookService();
-    console.log(req.body);
 
-    let clothes: { _id: ObjectID }[] = await Promise.all<{ _id: ObjectID }>((req.body.clothes).map((clothes: { _id: string } | { _id: ObjectID }) => {
+    const clothesList: { _id: ObjectID }[] = await Promise.all<{ _id: ObjectID }>((req.body.clothes).map((clothes: { _id: string } | { _id: ObjectID }) => {
         clothes._id = new ObjectID(clothes._id);
         return Promise.resolve(clothes);
     }));

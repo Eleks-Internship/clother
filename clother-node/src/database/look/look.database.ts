@@ -7,7 +7,7 @@ import { ObjectID } from "mongodb";
 export default class LookDatabase extends DatabaseObject<Look> implements Create<Look> {
 
     constructor(collection: string = "look") {
-        super({ database: dbLook, collection: collection});
+        super({ database: dbLook, collection });
     }
 
     public create(info: { name: string, clothes: { _id: ObjectID }[], user: { _id: ObjectID }}): Promise<Look | null> {
