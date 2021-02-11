@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
+import { environment } from 'src/environments/environment';
 import { HttpService } from './http.service';
 
 @Injectable({
@@ -15,7 +16,7 @@ export class LoginService {
   ) { }
 
   public login(info: { email: string, password: string }): void {
-    this.http.post<{ data: string, message?: string }>('/api/v1/login', info).subscribe(
+    this.http.post<{ data: string, message?: string }>(environment.urlForServer + '/api/v1/login', info).subscribe(
       res => {
         if (res.data) {
           localStorage.setItem('token', res.data);
@@ -71,7 +72,7 @@ export class LoginService {
   /* tslint:enable */
 
   private loginByFacebook(info: { lastName: string, firstName: string, email: string }): void {
-    this.http.post<{ data: string, message?: string }>('/api/v1/login/facebook', info).subscribe(
+    this.http.post<{ data: string, message?: string }>(environment.urlForServer + '/api/v1/login/facebook', info).subscribe(
       res => {
         if (res.data) {
           localStorage.setItem('token', res.data);
@@ -119,7 +120,7 @@ export class LoginService {
   /* tslint:enable */
 
   private loginByGoogle(info: { lastName: string, firstName: string, email: string }): void {
-    this.http.post<{ data: string, message?: string }>('/api/v1/login/google', info).subscribe(
+    this.http.post<{ data: string, message?: string }>(environment.urlForServer + '/api/v1/login/google', info).subscribe(
       res => {
         if (res.data) {
           localStorage.setItem('token', res.data);
