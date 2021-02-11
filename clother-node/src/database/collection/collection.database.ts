@@ -1,7 +1,7 @@
 import Database from "../database";
 import LogWithoutDatabaseService from '../../services/server-info/log/log_with_database.service';
 
-import { dbClothes, dbServerInfo, dbUser } from '../database_info';
+import { dbClothes, dbLook, dbServerInfo, dbUser } from '../database_info';
 
 export default class CollectionDatabase extends Database {
 
@@ -22,7 +22,7 @@ export default class CollectionDatabase extends Database {
     }
 
     public static deleteLook(): Promise<boolean> {
-        return CollectionDatabase.delete({ database: dbClothes, collection: 'look-test'});
+        return CollectionDatabase.delete({ database: dbLook, collection: 'look-test'});
     }
 
     private static delete(info: { database: string, collection: string }): Promise<boolean> {
