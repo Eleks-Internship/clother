@@ -6,6 +6,7 @@ import Clothes from '../../../src/interface/object/clothes';
 import CollectionDatabase from '../../../src/database/collection/collection.database';
 
 describe('Test database clothes', () => {
+    const user: { _id: ObjectID } = { _id: new ObjectID('6015a18c923e0e3b6442751c') };
     let name: string = "test"
     let photoName: string = "test";
     let urlForBuy: string = "test";
@@ -13,11 +14,12 @@ describe('Test database clothes', () => {
 
     it('create', async () => {
         const clothesDatabase: ClothesDatabase = new ClothesDatabase("clothes-test");
-        const clothes: Clothes | null = await clothesDatabase.create({ name, photoName, urlForBuy });
+        const clothes: Clothes | null = await clothesDatabase.create({ name, photoName, urlForBuy, user });
         if (clothes) {
             expect(clothes.name).to.eql(name);
             expect(clothes.photoName).to.eql(photoName);
             expect(clothes.urlForBuy).to.eql(urlForBuy);
+            expect(clothes.user).to.eql(user);
             _id = clothes._id;
         } else {
             expect(clothes).to.not.eql(null);
@@ -31,6 +33,7 @@ describe('Test database clothes', () => {
             expect(clothes.name).to.eql(name);
             expect(clothes.photoName).to.eql(photoName);
             expect(clothes.urlForBuy).to.eql(urlForBuy);
+            expect(clothes.user).to.eql(user);
         } else {
             expect(clothes).to.not.eql(null);
         }

@@ -13,7 +13,7 @@ export default class ClothesService implements Create<Clothes>, Get<Clothes>, Up
         this.clothesDatabase = new ClothesDatabase(collection);
     }
 
-    public async create(info: { name: string, photoName: string, urlForBuy: string }): Promise<Clothes | null> {
+    public async create(info: { name: string, photoName: string, urlForBuy: string, user: { _id: ObjectID } }): Promise<Clothes | null> {
         return this.clothesDatabase.create(info);
     }
 

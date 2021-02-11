@@ -25,7 +25,7 @@ router.post('/clothes', async (req: express.Request, res: express.Response) => {
     const clothesService: ClothesService = new ClothesService();
 
     try {
-        APIService.processingOnAPIOfDataModels({ req, res, method: clothesService.create(req.body), dataError: null });
+        APIService.processingOnAPIOfDataModels({ req, res, method: clothesService.create({ name: req.body.name, photoName: req.body.photoName, urlForBuy: req.body.urlForBuy, user: { _id: new ObjectID(req.body.user._id) }}), dataError: null });
     } catch (error) {
         APIService.catchError({ res, req, error, dataError: null });
     }
