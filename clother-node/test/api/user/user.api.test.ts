@@ -8,7 +8,7 @@ chai.use(chaiHttp);
 const server: string = process.env.SERVER || 'localhost';
 const port: string | number = process.env.PORT || 3000;
 
-describe('Test database user', () => {
+describe('Test api user', () => {
     const firstName: string = "firstName";
     const lastName: string = "lastName";
     const email: string = "email@email.com";

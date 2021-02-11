@@ -34,6 +34,10 @@ export default class UserService implements Create<User>, Get<User>, GetList<Use
         return user;
     }
 
+    public getByEmail(info: { email: string }): Promise<User | null> {
+        return this.userDatabase.getByKeys(info);
+    }
+
     public getList(): Promise<User[]> {
         return this.userDatabase.getList();
     }

@@ -37,6 +37,18 @@ describe('Test service user', () => {
         }
     });
 
+    it('get email', async () => {
+        const userDatabase: UserService = new UserService("user-test");
+        const user: User | null = await userDatabase.getByEmail({ email });
+        if (user) {
+            expect(user.firstName).to.eql(firstName);
+            expect(user.lastName).to.eql(lastName);
+            expect(user.email).to.eql(email);
+        } else {
+            expect(user).to.not.eql(null);
+        }
+    });
+
     it('get list', async () => {
         const userDatabase: UserService = new UserService("user-test");
         const userList: User[] = await userDatabase.getList();
