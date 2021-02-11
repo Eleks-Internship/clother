@@ -53,7 +53,7 @@ describe('Test database user', () => {
 
         const userDatabase: UserDatabase = new UserDatabase("user-test");
 
-        CollectionDatabase.deleteUser();
+        CollectionDatabase.deleteLook();
 
         expect(await userDatabase.update({ _id, data: { firstName, lastName, email, password } })).eql(true);
     });
