@@ -10,6 +10,15 @@ const port: string | number = process.env.PORT || 3000;
 
 app.use(express.static(path.join(__dirname, '../../clother-angular/dist/clother-angular')));
 
+app.use((req: express.Request, res: express.Response, next: express.NextFunction) => {
+    res.setHeader('Access-Control-Allow-Origin', 'http://localhost:4200');
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
+    res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
+    res.setHeader('Access-Control-Allow-Credentials', "true");
+
+    next();
+});
+
 app.use('/api', api);
 
 app.get('**', (req: express.Request, res: express.Response) => {
