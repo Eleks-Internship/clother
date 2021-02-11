@@ -30,4 +30,15 @@ describe('Test api look', () => {
             }
         });
     });
+
+    it('get list', () => {
+        return chai.request('http://' + server +':' + port + '/api').get('/v1/looks').then(res => {
+            chai.expect(res.status).to.eql(200);
+            if (res.body) {
+                chai.expect(res.body.data.length).to.not.eql(0);
+            } else {
+                chai.expect(res.body).to.not.eql(null);
+            }
+        });
+    });
 });
