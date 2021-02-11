@@ -4,6 +4,26 @@ html, body {
     padding: 0;
 }
 
+form {
+    input {
+        width: calc(100% - 26px);
+        padding: 13px 13px;
+        margin: 15px 0px;
+        border: 1px solid black;
+    }
+
+    button {
+        margin-top: 30px;
+        width: 100%;
+        font-size: 20px;
+        padding: 13px;
+        background-color: white;
+        color: black;
+        border: 1px solid black;
+    }
+}
+
+
 .full-screen {
     width: 100%;
     height: 100%;
@@ -14,4 +34,24 @@ html, body {
 
 .background-gradient {
     background: linear-gradient(0.25turn, #677BF8, #368060);
+}
+
+.flex-space-between {
+    display: flex;
+    justify-content: space-between;
+}
+
+.logo {
+    display: block;
+    margin: 0 auto;
+    width: 300px;
+}
+
+.container {
+    display: block;
+    margin: 10px auto;
+    max-width: 700px;
+    width: calc(90% - 40px);
+    background-color: white;
+    padding: 20px;
 }

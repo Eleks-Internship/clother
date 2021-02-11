@@ -7,7 +7,7 @@ export class HttpService {
 
   constructor() { }
 
-  public processingOfStatus(errorStatus): void {
+  public processingOfStatus(errorStatus: number): void {
     console.log(errorStatus);
     switch (errorStatus) {
       case 400:
