@@ -1,9 +1,9 @@
 import Create from "../../interface/class/create";
 import Error from "../../interface/object/error";
-import Database from "../database";
+import DatabaseObject from "../database_object";
 import { dbServerInfo } from "../database_info";
 
-export default class ErrorDatabase extends Database<Error> implements Create<Error> {
+export default class ErrorDatabase extends DatabaseObject<Error> implements Create<Error> {
     constructor(collection: string = "error") {
         super({ database: dbServerInfo, collection });
     }

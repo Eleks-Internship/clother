@@ -3,6 +3,7 @@ import { ObjectID } from 'mongodb';
 
 import ClothesDatabase from '../../../src/database/clothes/clothes.database';
 import Clothes from '../../../src/interface/object/clothes';
+import CollectionDatabase from '../../../src/database/collection/collection.database';
 
 describe('Test database clothes', () => {
     let name: string = "test"
@@ -46,6 +47,9 @@ describe('Test database clothes', () => {
 
     it('delete', async () => {
         const clothesDatabase: ClothesDatabase = new ClothesDatabase("clothes-test");
+
+        CollectionDatabase.deleteClothes();
+        
         expect(await clothesDatabase.delete(_id)).to.eql(true);
     });
 });

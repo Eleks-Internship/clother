@@ -2,6 +2,7 @@ import { expect } from 'chai';
 
 import ClothesService from '../../../src/services/clothes/clothes.service';
 import Clothes from '../../../src/interface/object/clothes';
+import CollectionDatabase from '../../../src/database/collection/collection.database';
 import { ObjectID } from 'mongodb';
 
 describe('Test service clothes', () => {
@@ -46,6 +47,9 @@ describe('Test service clothes', () => {
 
     it('delete', async () => {
         const clothesService: ClothesService = new ClothesService("clothes-test");
+
+        CollectionDatabase.deleteClothes();
+
         expect(await clothesService.delete(_id)).to.eql(true);
     });
 });
