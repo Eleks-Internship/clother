@@ -14,4 +14,8 @@ describe('Test database collection', () => {
     it('delete clothes', async () => {
         expect(await CollectionDatabase.deleteClothes()).to.eql(true);
     });
+
+    it('delete look', async () => {
+        expect(await CollectionDatabase.deleteLook()).to.eql(true);
+    });
 });
