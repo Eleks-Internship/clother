@@ -14,4 +14,14 @@ router.post('/login', (req: express.Request, res: express.Response) => {
     }
 });
 
+router.post('/login/facebook', (req: express.Request, res: express.Response) => {
+    const loginService: LoginService = new LoginService();
+
+    try {
+        APIService.processingOnAPIOfDataModels({req, res, method: loginService.getTokenThanksByFaceebook(req.body), dataError: ''});
+    } catch(error) {
+        APIService.catchError(error);
+    }
+});
+
 export default router;
