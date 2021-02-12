@@ -44,7 +44,7 @@ describe('Test api user', () => {
         });
     });
 
-    it('get list of users', async () => {
+    it('get user', async () => {
         return chai.request('http://' + server +':' + port + '/api').get('/v1/users/' + _id).then(res => {
             chai.expect(res.status).to.eql(200);
             if (res.body) {
@@ -66,6 +66,18 @@ describe('Test api user', () => {
             chai.expect(res.status).to.eql(200);
             if (res.body) {
                 chai.expect(res.body.data).to.eql(true);
+            } else {
+                chai.expect(res.body).to.not.eql(null);
+            }
+        });
+    });
+
+    it('users get clothes list', async () => {
+        return chai.request('http://' + server +':' + port + '/api').get('/v1/users/' + _id + '/clothes').then(res => {
+            chai.expect(res.status).to.eql(200);
+            if (res.body) {
+                chai.expect(res.body.data).to.not.eql(null);
+                chai.expect(Array.isArray(res.body.data)).to.eql(true);
             } else {
                 chai.expect(res.body).to.not.eql(null);
             }
