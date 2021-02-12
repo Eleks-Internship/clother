@@ -38,7 +38,7 @@ router.post('/looks', async (req: express.Request, res: express.Response) => {
 
 router.put('/looks', async (req: express.Request, res: express.Response) => {
     if (!req.body) return res.status(400).send({ data: null, message: 'user did not enter data in the form' });
-    
+
     const lookService: LookService = new LookService();
 
     const clothesList: { _id: ObjectID }[] = await Promise.all<{ _id: ObjectID }>((req.body.clothes).map((clothes: { _id: string } | { _id: ObjectID }) => {
