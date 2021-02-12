@@ -45,21 +45,4 @@ describe('Test api login', () => {
             }
         });
     });
-
-    it('post google', async () => {
-        return chai.request('http://' + server +':' + port + '/api').post('/v1/login/google').send({
-            firstName,
-            lastName,
-            email
-        }).then(res => {
-            chai.expect(res.status).to.eql(200);
-            if (res.body) {
-                chai.expect(res.body.data).to.not.eql(null);
-                chai.expect(res.body.data).to.not.eql('');
-                chai.expect(res.body.data).to.be.a('string');
-            } else {
-                chai.expect(res.body).to.not.eql(null);
-            }
-        });
-    });
 });

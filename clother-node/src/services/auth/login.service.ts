@@ -37,7 +37,7 @@ export default class LoginService {
         return '';
     }
 
-    public async getTokenBySocialMedia(info: { lastName: string, firstName: string, email: string }) {
+    public async getTokenThanksByFaceebook(info: { lastName: string, firstName: string, email: string }) {
         const userService: UserService = new UserService(this.collectionUser);
         const authService: AuthService = new AuthService();
 

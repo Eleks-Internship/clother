@@ -28,10 +28,10 @@ describe('Test service login', () => {
         expect(token).to.be.a('string');
     });
 
-    it('get token by social media', async () => {
+    it('get token thanks by facebook', async () => {
         const loginService: LoginService = new LoginService("user-test");
 
-        const token: string = await loginService.getTokenBySocialMedia({ firstName, lastName, email });
+        const token: string = await loginService.getTokenThanksByFaceebook({ firstName, lastName, email });
 
         CollectionDatabase.deleteUser();
 
