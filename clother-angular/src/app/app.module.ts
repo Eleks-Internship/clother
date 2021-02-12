@@ -4,7 +4,7 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 
 import { ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { SignUpComponent } from './pages/sign-up/sign-up.component';
@@ -13,6 +13,8 @@ import { FooterComponent } from './components/footer/footer.component';
 import { SignUpFormComponent } from './components/sign-up-form/sign-up-form.component';
 import { LoginComponent } from './pages/login/login.component';
 import { LoginFormComponent } from './components/login-form/login-form.component';
+import { LoginBySocialMediaComponent } from './components/login-by-social-media/login-by-social-media.component';
+import { HttpService } from './service/http.service';
 
 @NgModule({
   declarations: [
@@ -23,6 +25,7 @@ import { LoginFormComponent } from './components/login-form/login-form.component
     SignUpFormComponent,
     LoginComponent,
     LoginFormComponent,
+    LoginBySocialMediaComponent,
   ],
   imports: [
     BrowserModule,
@@ -30,7 +33,13 @@ import { LoginFormComponent } from './components/login-form/login-form.component
     ReactiveFormsModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: HttpService,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
