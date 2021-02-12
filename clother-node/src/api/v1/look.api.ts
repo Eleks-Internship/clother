@@ -47,6 +47,16 @@ router.put('/looks', async (req: express.Request, res: express.Response) => {
     } catch(error) {
         APIService.catchError({ req, res, error, dataError: null });
     }
-})
+});
+
+router.delete('/looks/:id', (req: express.Request, res: express.Response) => {
+    const lookService: LookService = new LookService();
+
+    try {
+        APIService.processingOnAPIOfDataModels({ req, res, method: lookService.delete(new ObjectID(req.params.id)), dataError: false });
+    } catch(error) {
+        APIService.catchError({ req, res, error, dataError: null });
+    }
+});
 
 export default router;
