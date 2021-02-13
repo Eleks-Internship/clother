@@ -4,8 +4,9 @@ import DatabaseObject from "../database_object";
 import { dbLook } from '../database_info';
 import { ObjectID } from "mongodb";
 import GetList from "../../interface/class/get_list";
+import Update from "../../interface/class/update";
 
-export default class LookDatabase extends DatabaseObject<Look> implements Create<Look>, GetList<Look> {
+export default class LookDatabase extends DatabaseObject<Look> implements Create<Look>, GetList<Look>, Update {
 
     constructor(collection: string = "look") {
         super({ database: dbLook, collection });
@@ -17,5 +18,9 @@ export default class LookDatabase extends DatabaseObject<Look> implements Create
 
     public getList(): Promise<Look[]> {
         return super.getList();
+    }
+
+    public update(info: { _id: ObjectID, data: { name: string, clothes: { _id: ObjectID }[] } }): Promise<boolean> {
+        return super.update(info);
     }
 }
