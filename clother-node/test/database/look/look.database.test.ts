@@ -14,8 +14,6 @@ describe('Test database look', () => {
         const lookDatabase: LookDatabase = new LookDatabase("look-test");
         const look: Look | null = await lookDatabase.create({ name, clothes, user });
 
-        CollectionDatabase.deleteUser();
-
         if (look) {
             expect(look.name).to.eql(name);
             expect(look.clothes).to.eql(clothes);
@@ -23,5 +21,18 @@ describe('Test database look', () => {
         } else {
             expect(clothes).to.not.eql(null);
         }
+    });
+
+    it('get list', async () => {
+        const lookDatabase: LookDatabase = new LookDatabase("look-test");
+        const lookList: Look[] = await lookDatabase.getList();
+
+        CollectionDatabase.deleteLook();
+
+        expect(lookList).to.not.eql(null);
+        expect(lookList.length).to.not.eql(0);
+        expect(lookList[0].name).to.eql(name);
+        expect(lookList[0].clothes).to.eql(clothes);
+        expect(lookList[0].user).to.eql(user);
     });
 });
