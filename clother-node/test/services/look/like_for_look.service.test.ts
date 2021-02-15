@@ -19,9 +19,21 @@ describe('Test service like for look', () => {
         }
     });
 
-    it('get list by key', async () => {
+    it('get list by look', async () => {
         const likeForLookService: LikeForLookService = new LikeForLookService("like-for-look-test");
         const likeForLooList: LikeForLook[] = await likeForLookService.getListByLook({ look });
+
+        if (likeForLooList) {
+            expect(likeForLooList[0].user).to.eql(user);
+            expect(likeForLooList[0].look).to.eql(look);
+        } else {
+            expect(likeForLooList).to.not.eql(null);
+        }
+    });
+
+    it('get list by user', async () => {
+        const likeForLookService: LikeForLookService = new LikeForLookService("like-for-look-test");
+        const likeForLooList: LikeForLook[] = await likeForLookService.getListByUser({ user });
 
         if (likeForLooList) {
             expect(likeForLooList[0].user).to.eql(user);
