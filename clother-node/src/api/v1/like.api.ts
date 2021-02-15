@@ -27,4 +27,21 @@ router.get('/like', async (req: express.Request, res: express.Response) => {
     }
 });
 
+router.delete('/like/:id', async (req: express.Request, res: express.Response) => {
+    const likeForLookService: LikeForLookService = new LikeForLookService();
+
+    const loginService: LoginService = new LoginService();
+    const userID: ObjectID | null = await loginService.getIdOfUserLogin({ token: req.headers.authorization });
+
+    if (!userID) {
+        return res.status(401).json({ data: null });
+    }
+
+    try {
+        APIService.processingOnAPIOfDataModels({ req, res, method: likeForLookService.delete(new ObjectID(req.params.id)), dataError: false });
+    } catch(error) {
+        APIService.catchError({ req, res, error, dataError: false });
+    }
+});
+
 export default router;
