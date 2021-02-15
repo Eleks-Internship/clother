@@ -16,4 +16,8 @@ export default class LikeForLookService {
     public getListByLook(info: { look: { _id: ObjectID; } }): Promise<LikeForLook[]> {
         return this.likeForLookDatabase.getListByKeys(info);
     }
+
+    public getListByUser(info: { user: { _id: ObjectID; } }): Promise<LikeForLook[]> {
+        return this.likeForLookDatabase.getListByKeys(info);
+    }
 }
