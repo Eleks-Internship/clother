@@ -20,4 +20,7 @@ export default class LikeForLookService {
     public getListByUser(info: { user: { _id: ObjectID; } }): Promise<LikeForLook[]> {
         return this.likeForLookDatabase.getListByKeys(info);
     }
+    public delete(_id: ObjectID): Promise<boolean> {
+        return this.likeForLookDatabase.delete(_id);
+    }
 }
