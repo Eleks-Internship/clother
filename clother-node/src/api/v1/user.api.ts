@@ -4,6 +4,7 @@ import APIService from '../../services/api.service';
 import LoginService from '../../services/auth/login.service';
 import UserService from '../../services/user/user.service';
 import { ObjectID } from 'mongodb';
+import ClothesService from '../../services/clothes/clothes.service';
 
 const router: express.Router = express.Router();
 
@@ -51,6 +52,16 @@ router.put('/users', (req: express.Request, res: express.Response) => {
         APIService.processingOnAPIOfDataModels({ req, res, method: userService.update({ _id: new ObjectID(req.body.id), data: { firstName: req.body.firstName, lastName:req.body.lastName, email: req.body.email, password: req.body.password } }), dataError: null });
     } catch (error) {
         APIService.catchError({ res, req, error, dataError: null });
+    }
+});
+
+router.get('/users/:id/clothes', (req: express.Request, res: express.Response) => {
+    const clothesService: ClothesService = new ClothesService();
+
+    try {
+        APIService.processingOnAPIOfDataModels({ req, res, method: clothesService.getListOfUser({ user: { _id: new ObjectID(req.params.id) } }), dataError: [] });
+    } catch (error) {
+        APIService.catchError({ res, req, error, dataError: [] });
     }
 });
 

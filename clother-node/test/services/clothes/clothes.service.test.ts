@@ -39,6 +39,20 @@ describe('Test service clothes', () => {
         }
     });
 
+
+
+    it('users get list', async () => {
+        const clothesService: ClothesService = new ClothesService("clothes-test");
+        const clothesList: Clothes[] = await clothesService.getListOfUser({ user });
+
+        expect(clothesList).to.not.eql(null);
+        expect(clothesList.length).to.not.eql(0);
+        expect(clothesList[0].name).to.eql(name);
+        expect(clothesList[0].photoName).to.eql(photoName);
+        expect(clothesList[0].urlForBuy).to.eql(urlForBuy);
+        expect(clothesList[0].user).to.eql(user);
+    });
+
     it('update', async () => {
         name = "testUpdate"
         photoName = "testUpdate";

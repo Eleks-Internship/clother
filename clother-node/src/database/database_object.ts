@@ -118,6 +118,31 @@ export default abstract class DatabaseObject<T> extends Database {
         });
     }
 
+    protected getListByKeys(info: object): Promise<T[]> {
+        return new Promise<T[]>((resolve, reject) => {
+            Database.connect().then(client => {
+                client.db(this.database).collection(this.collection).find(info).toArray((error: object, data: any) => {
+                    resolve(data ?? []);
+
+                    if (error) {
+                        const logWithoutDatabaseService: LogWithoutDatabaseService = new LogWithoutDatabaseService();
+                        logWithoutDatabaseService.logError({ message: error });
+
+                        reject(error);
+                    }
+                });
+
+                client.close();
+            }).catch(error => {
+                const logWithoutDatabaseService: LogWithoutDatabaseService = new LogWithoutDatabaseService();
+                logWithoutDatabaseService.logError({ message: error });
+
+                resolve([]);
+                reject(error);
+            });
+        });
+    }
+
     protected update(info: { _id: ObjectID, data: any}): Promise<boolean> {
         return new Promise<boolean>((resolve, reject) => {
             Database.connect().then(client => {
