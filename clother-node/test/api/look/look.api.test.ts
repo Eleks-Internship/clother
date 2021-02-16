@@ -45,11 +45,22 @@ describe('Test api look', () => {
     });
 
     it('put', () => {
-        return chai.request('http://' + server +':' + port + '/api').put('/v1/clothes').send({
+        return chai.request('http://' + server +':' + port + '/api').put('/v1/looks').send({
             id: _id,
             name,
             clothes
         }).then(res => {
+            chai.expect(res.status).to.eql(200);
+            if (res.body) {
+                chai.expect(res.body.data).to.eql(true);
+            } else {
+                chai.expect(res.body).to.not.eql(false);
+            }
+        });
+    });
+
+    it('delete', () => {
+        return chai.request('http://' + server +':' + port + '/api').delete('/v1/looks/' + _id.toString()).then(res => {
             chai.expect(res.status).to.eql(200);
             if (res.body) {
                 chai.expect(res.body.data).to.eql(true);

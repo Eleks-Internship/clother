@@ -47,4 +47,11 @@ describe('Test service look', () => {
 
         CollectionDatabase.deleteUser();
     });
+
+    it('delete', async () => {
+        const lookService: LookService = new LookService("look-test");
+        expect(await lookService.delete(_id)).eql(true);
+
+        CollectionDatabase.deleteLook();
+    });
 });

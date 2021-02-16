@@ -42,6 +42,11 @@ describe('Test database look', () => {
 
         const lookDatabase: LookDatabase = new LookDatabase("look-test");
         expect(await lookDatabase.update({ _id, data: { name, clothes } })).eql(true);
+    });
+
+    it('delete', async () => {
+        const lookDatabase: LookDatabase = new LookDatabase("look-test");
+        expect(await lookDatabase.delete(_id)).eql(true);
 
         CollectionDatabase.deleteLook();
     });
