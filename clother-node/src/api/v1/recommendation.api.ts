@@ -16,12 +16,12 @@ const storage = multer.diskStorage({
     }
 });
 
-const upload = multer({ storage: storage });
+const upload: any = multer({ storage });
 
 router.post('/recommendations', upload.single('image'), (req: express.Request, res: express.Response) => {
     if (!req.body) return res.status(400).send({ data: null, message: 'user did not enter data in the form' });
 
-    const file = req['file'];
+    const file = req.file;
 
     if (!file) {
         const error = new Error('No File');
@@ -41,7 +41,7 @@ router.post('/recommendations', upload.single('image'), (req: express.Request, r
         body: form,
         headers: { 'Authorization': 'Basic YWxhZGRpbjpvcGVuc2VzYW1lljrhebgervwekbflisufbewyufewfsngsdbgrrldngsufigbeurgb' },
     })
-    .then(res => res.json())
+    .then(response => response.json())
     .then(json => res.json({ data: json }));
 });
 
