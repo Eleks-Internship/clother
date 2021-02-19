@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  urlForServer: 'http://localhost:3000'
+  urlForServer: 'https://clother-node-bgilpzvcca-de.a.run.app'
 };
 
 /*
