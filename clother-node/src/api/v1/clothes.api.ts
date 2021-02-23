@@ -1,10 +1,15 @@
 import express from 'express';
+import multer from 'multer';
 import bodyParser from 'body-parser';
 import APIService from '../../services/api.service';
 import ClothesService from '../../services/clothes/clothes.service';
 import { ObjectID } from 'mongodb';
+import PhotoOfClothesDatabase from '../../database/file/photo_of_clothes.database';
 
 const router: express.Router = express.Router();
+
+const photoOfClothesDatabase: PhotoOfClothesDatabase = new PhotoOfClothesDatabase();
+const upload: any = multer({ storage: photoOfClothesDatabase.save() });
 
 router.use(bodyParser.urlencoded({extended: true}));
 router.use(bodyParser.json());
@@ -19,7 +24,7 @@ router.get('/clothes/:id', async (req: express.Request, res: express.Response) =
     }
 });
 
-router.post('/clothes', async (req: express.Request, res: express.Response) => {
+router.post('/clothes', upload.single('image'), async (req: express.Request, res: express.Response) => {
     if (!req.body) return res.status(400).send({ data: null, message: 'user did not enter data in the form' });
 
     const clothesService: ClothesService = new ClothesService();
