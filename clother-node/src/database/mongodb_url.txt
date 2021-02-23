@@ -1,1 +1,1 @@
-mongodb+srv://user:fqg78pXPCpt8dtk@cluster0.xzh33.mongodb.net/<dbname>?retryWrites=true&w=majority
+mongodb+srv://user:fqg78pXPCpt8dtk@cluster0.xzh33.mongodb.net/file?retryWrites=true&w=majority
