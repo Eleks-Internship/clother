@@ -1,7 +1,6 @@
 import express from 'express';
 import fs from 'fs';
 import multer from 'multer';
-import request from 'request';
 import fetch from 'node-fetch';
 import FormData from 'form-data';
 
