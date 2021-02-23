@@ -38,6 +38,16 @@ router.post('/looks/:id/like', async (req: express.Request, res: express.Respons
     }
 });
 
+router.get('/looks/:id/like', async (req: express.Request, res: express.Response) => {
+    const likeForLookService: LikeForLookService = new LikeForLookService();
+
+    try {
+        APIService.processingOnAPIOfDataModels({ req, res, method: likeForLookService.getListByLook({ look: { _id: new ObjectID(req.params.id) } }), dataError: [] });
+    } catch(error) {
+        APIService.catchError({ req, res, error, dataError: [] });
+    }
+});
+
 router.post('/looks', async (req: express.Request, res: express.Response) => {
     if (!req.body) return res.status(400).send({ data: null, message: 'user did not enter data in the form' });
 

@@ -12,13 +12,25 @@ describe('Test database like for look', () => {
         const likeForLookDatabase: LikeForLookDatabase = new LikeForLookDatabase("like-for-look-test");
         const likeForLook: LikeForLook | null = await likeForLookDatabase.create({ user, look });
 
-        CollectionDatabase.deleteLook();
-
         if (likeForLook) {
             expect(likeForLook.user).to.eql(user);
             expect(likeForLook.look).to.eql(look);
         } else {
             expect(likeForLook).to.not.eql(null);
+        }
+    });
+
+    it('get list by key', async () => {
+        const likeForLookDatabase: LikeForLookDatabase = new LikeForLookDatabase("like-for-look-test");
+        const likeForLookList: LikeForLook[] = await likeForLookDatabase.getListByKeys({ user, look });
+
+        CollectionDatabase.deleteLook();
+
+        if (likeForLookList) {
+            expect(likeForLookList[0].user).to.eql(user);
+            expect(likeForLookList[0].look).to.eql(look);
+        } else {
+            expect(likeForLookList).to.not.eql(null);
         }
     });
 });
