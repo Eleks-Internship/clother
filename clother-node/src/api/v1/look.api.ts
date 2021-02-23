@@ -32,7 +32,7 @@ router.post('/looks/:id/like', async (req: express.Request, res: express.Respons
     }
 
     try {
-        APIService.processingOnAPIOfDataModels({ req, res, method: likeForLookService.create({ look: { _id: new ObjectID(req.params.id) }, user: { _id: new ObjectID() } }), dataError: null });
+        APIService.processingOnAPIOfDataModels({ req, res, method: likeForLookService.create({ look: { _id: new ObjectID(req.params.id) }, user: { _id: userID } }), dataError: null });
     } catch(error) {
         APIService.catchError({ req, res, error, dataError: null });
     }
