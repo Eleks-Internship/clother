@@ -1,13 +1,16 @@
+import { ObjectID } from "mongodb";
 import User from "../../interface/object/user";
 import LogWithDatabaseService from "../server-info/log/log_without_database.service";
 import PasswordService from "../user/password.service";
 import UserService from "../user/user.service";
 import AuthService from "./auth.service";
 
-export default class LoginService {
+export default class LoginService extends AuthService {
     private readonly collectionUser: string;
 
     constructor(collectionUser: string = 'user') {
+        super();
+
         this.collectionUser = collectionUser;
     }
 
@@ -19,8 +22,7 @@ export default class LoginService {
         }).then(user => {
             if (!user) return '';
 
-            const authService: AuthService = new AuthService();
-            return authService.createToken(user._id.toString());
+            return super.createToken(user._id.toString());
         });
     }
 
@@ -31,15 +33,13 @@ export default class LoginService {
         const user: User | null = await userService.getByEmail({ email: info.email });
 
         if (user?.password && passwordService.verificatePassword(user?.password)) {
-            const authService: AuthService = new AuthService();
-            return authService.createToken(user._id.toString());
+            return super.createToken(user._id.toString());
         }
         return '';
     }
 
-    public async getTokenBySocialMedia(info: { lastName: string, firstName: string, email: string }) {
+    public async getTokenBySocialMedia(info: { lastName: string, firstName: string, email: string }): Promise<string> {
         const userService: UserService = new UserService(this.collectionUser);
-        const authService: AuthService = new AuthService();
 
         let user: User | null = await userService.getByEmail({ email: info.email });
 
@@ -47,7 +47,24 @@ export default class LoginService {
             user = await userService.create({ firstName: info.firstName, lastName: info.lastName, email: info.email, password: ''})
         }
 
-        if (user) return authService.createToken(user._id.toString());
+        if (user) return super.createToken(user._id.toString());
         return '';
+    }
+
+    public async getIdOfUserLogin(info: { token: string | undefined }): Promise<ObjectID | null> {
+        if (!info.token) return null;
+
+        const { access, authData } = await super.verificateToken(info.token);
+
+        if (!access) return null;
+
+        try {
+            return new ObjectID(authData?.id);
+        } catch (error) {
+            const logWithDatabaseService: LogWithDatabaseService = new LogWithDatabaseService();
+            logWithDatabaseService.logError({ message: error });
+
+            return null;
+        }
     }
 }
