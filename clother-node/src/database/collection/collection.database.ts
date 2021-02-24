@@ -25,6 +25,10 @@ export default class CollectionDatabase extends Database {
         return CollectionDatabase.delete({ database: dbLook, collection: 'look-test'});
     }
 
+    public static deleteLikeForLook(): Promise<boolean> {
+        return CollectionDatabase.delete({ database: dbLook, collection: 'like-for-look-test'});
+    }
+
     private static delete(info: { database: string, collection: string }): Promise<boolean> {
         return new Promise<boolean>((resolve, reject) => {
             Database.connect().then(client => {
