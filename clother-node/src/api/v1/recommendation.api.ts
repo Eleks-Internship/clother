@@ -41,7 +41,11 @@ router.post('/recommendations', upload.single('image'), (req: express.Request, r
         headers: { 'Authorization': 'Basic YWxhZGRpbjpvcGVuc2VzYW1lljrhebgervwekbflisufbewyufewfsngsdbgrrldngsufigbeurgb' },
     })
     .then(response => response.json())
-    .then(json => res.json({ data: json }));
+    .then(json => {
+        res.json({ data: json });
+
+        fs.unlinkSync(`image/recommendation/FunOfHeuristic_${file.originalname}`);
+    });
 });
 
 export default router;

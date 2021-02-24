@@ -141,6 +141,8 @@ router.post('/clothes', upload.single('image'), async (req: express.Request, res
             })
             .then(response => response.json())
             .then(json => {
+                fs.unlinkSync(`image/recommendation/${req.file.filename}`);
+                
                 const clothesService: ClothesService = new ClothesService();
 
                 try {
