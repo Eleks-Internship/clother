@@ -13,7 +13,7 @@ export default class ClothesDatabase extends DatabaseObject<Clothes> implements 
         super({ database: dbClothes, collection });
     }
 
-    public create(info: { name: string, photoName: string, urlForBuy: string , user: { _id: ObjectID }}): Promise<Clothes | null> {
+    public create(info: { name: string, photoName: string, urlForBuy: string, infoOfClothes: { label: string, probability: string }[], user: { _id: ObjectID }}): Promise<Clothes | null> {
         return super.create(info);
     }
 

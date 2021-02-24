@@ -2,6 +2,7 @@ import GridFsStorage from 'multer-gridfs-storage';
 import Grid from 'gridfs-stream';
 import crypto from 'crypto';
 import path from 'path';
+import fs from 'fs';
 import Database from '../database';
 import { mongodbUrl } from '../database_info';
 import mongoose from 'mongoose';
@@ -36,6 +37,21 @@ export default class PhotoOfClothesDatabase extends Database {
                         resolve(fileInfo);
                     });
                 });
+            }
+        });
+    }
+
+    public downoladFile(info: { filename: string }): Promise<boolean> {
+        return new Promise<boolean>(async (resolve) => {
+            if (await this.grid()) {
+                let fsstreamwrite = fs.createWriteStream(path.join(process.cwd(), `./image/recommendation/${info.filename}`));
+                let readstream = (await this.grid()).createReadStream({ filename: info.filename });
+                readstream.pipe(fsstreamwrite);
+                readstream.on("close", file => {
+                    resolve(true);
+                });
+            } else {
+                resolve(false);
             }
         });
     }

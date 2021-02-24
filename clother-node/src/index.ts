@@ -1,6 +1,7 @@
 import express from 'express';
 import http from 'http';
 import path from 'path';
+import fs from 'fs';
 
 import api from './api/api';
 import LogWithoutDatabaseService from './services/server-info/log/log_without_database.service';
@@ -25,7 +26,8 @@ app.get('**', (req: express.Request, res: express.Response) => {
     res.status(200).sendFile(path.join(__dirname, '../../clother-angular/dist/clother-angular/index.html'));
 });
 
-
+if (!fs.existsSync("./image")) fs.mkdirSync("./image");
+if (!fs.existsSync("./image/recommendation")) fs.mkdirSync("./image/recommendation");
 
 const server: http.Server = http.createServer(app);
 server.listen(port, () => {
