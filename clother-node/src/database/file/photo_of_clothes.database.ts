@@ -8,7 +8,7 @@ import { mongodbUrl } from '../database_info';
 import mongoose from 'mongoose';
 
 export default class PhotoOfClothesDatabase extends Database {
-    constructor() { 
+    constructor() {
         super();
     }
 
@@ -31,7 +31,7 @@ export default class PhotoOfClothesDatabase extends Database {
                         }
                         const filename = buf.toString('hex') + path.extname(file.originalname);
                         const fileInfo = {
-                            filename: filename,
+                            filename,
                             bucketName: 'uploads'
                         };
                         resolve(fileInfo);
@@ -44,10 +44,10 @@ export default class PhotoOfClothesDatabase extends Database {
     public downoladFile(info: { filename: string }): Promise<boolean> {
         return new Promise<boolean>(async (resolve) => {
             if (await this.grid()) {
-                let fsstreamwrite = fs.createWriteStream(path.join(process.cwd(), `./image/recommendation/${info.filename}`));
-                let readstream = (await this.grid()).createReadStream({ filename: info.filename });
+                const fsstreamwrite: fs.WriteStream = fs.createWriteStream(path.join(process.cwd(), `./image/recommendation/${info.filename}`));
+                const readstream: any = (await this.grid()).createReadStream({ filename: info.filename });
                 readstream.pipe(fsstreamwrite);
-                readstream.on("close", file => {
+                readstream.on("close", (file: any) => {
                     resolve(true);
                 });
             } else {
@@ -76,8 +76,6 @@ export default class PhotoOfClothesDatabase extends Database {
     public getList(): Promise<boolean | any[]> {
         return new Promise<boolean | any[]>(async (resolve, reject) => {
             (await this.grid()).files.find().toArray((err, files) => {
-                console.log(err, files);
-                
                 if (!files || files.length === 0) {
                     resolve(false);
                 } else {

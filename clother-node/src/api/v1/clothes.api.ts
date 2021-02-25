@@ -30,110 +30,20 @@ router.get('/clothes/:id', async (req: express.Request, res: express.Response) =
 router.post('/clothes', upload.single('image'), async (req: express.Request, res: express.Response) => {
     if (!req.body) return res.status(400).send({ data: null, message: 'user did not enter data in the form' });
 
-    // const pipe = util.promisify(pipeline);
-
-    // const bucket = new mongodb.GridFSBucket(db, {
-    //     chunkSizeBytes: 1024,
-    //     bucketName: 'update'
-    //   });
-      
-    //   fs.createReadStream('./' + req.file.filename).
-    //     pipe(bucket.openUploadStream(req.file.filename).
-    //     on('error', function(error: any) {
-    //       assert.ifError(error);
-    //     }).
-    //     on('finish', function() {
-    //       console.log('done!');
-    //       process.exit(0);
-    //     });
-
-    // const photoOfClothesDatabase: PhotoOfClothesDatabase = new PhotoOfClothesDatabase();
-
-    // const pass: PassThrough = await photoOfClothesDatabase.get({ filename: req.file.filename });
-    // const writable: Writable = new Writable();
-
-    // pass.pipe(writable);
-    // console.log(writable);
-
-    // pass.pipe(writable);
-    // pass.unpipe(writable);
-
-    // pass.on('data', (chunk) => { console.log(chunk.toString()); });
-    // pass.write('ok');  // Will not emit 'data'.
-    // pass.resume();
-
-
-    
-
-    // if (!req.file) {
-    //     const error = new Error('No File');
-    //     return res.send(error);
-    // }
-
-    // const form = new FormData();
-    // const buffer = fs.createReadStream(req.file.path);
-
-    // form.append('image', buffer, undefined);
-
-    // fetch("https://flask-models-n6vwx54efa-uc.a.run.app/predict", {
-    //     method: 'POST',
-    //     body: JSON.stringify({ image: fs.createReadStream(req.file.path) }),
-    //     headers: { 'Authorization': 'Basic YWxhZGRpbjpvcGVuc2VzYW1lljrhebgervwekbflisufbewyufewfsngsdbgrrldngsufigbeurgb' },
-    // })
-    // .then(response => response.json())
-    // .then(json => res.json({ data: json }));
-
-
-
-
-
-
-
-
-    // const file = req.file;
-
-    // if (!file) {
-    //     const error = new Error('No File');
-    //     return res.send(error);
-    // }
-
-    // const form = new FormData();
-    // const buffer = fs.createReadStream(file.path);
-
-    // form.append('image', buffer, {
-    //     contentType: 'text/plain',
-    //     filename: file.originalname,
-    // });
-
-    // fetch("https://flask-models-n6vwx54efa-uc.a.run.app/predict", {
-    //     method: 'POST',
-    //     body: form,
-    //     headers: { 'Authorization': 'Basic YWxhZGRpbjpvcGVuc2VzYW1lljrhebgervwekbflisufbewyufewfsngsdbgrrldngsufigbeurgb' },
-    // })
-    // .then(response => response.json())
-    // .then(json => res.json({ data: json }));
-
-
-
-
-
-
-
-
-
-    const photoOfClothesDatabase: PhotoOfClothesDatabase = new PhotoOfClothesDatabase();
-    let infoOfClothes: { label: string, probability: string }[] = [];
+    if (!req.file) {
+        return res.status(500).json({ data: null, message: 'no file' });
+    }
 
     photoOfClothesDatabase.downoladFile({ filename: req.file.filename }).then(access => {
         if (access) {
             const form = new FormData();
             const buffer = fs.createReadStream(`image/recommendation/${req.file.filename}`);
-        
+
             form.append('image', buffer, {
                 contentType: 'text/plain',
                 filename: req.file.originalname,
             });
-        
+
             fetch("https://flask-models-n6vwx54efa-uc.a.run.app/predict", {
                 method: 'POST',
                 body: form,
@@ -142,7 +52,7 @@ router.post('/clothes', upload.single('image'), async (req: express.Request, res
             .then(response => response.json())
             .then(json => {
                 fs.unlinkSync(`image/recommendation/${req.file.filename}`);
-                
+
                 const clothesService: ClothesService = new ClothesService();
 
                 try {
@@ -150,6 +60,8 @@ router.post('/clothes', upload.single('image'), async (req: express.Request, res
                 } catch (error) {
                     APIService.catchError({ res, req, error, dataError: null });
                 }
+            }).catch(error => {
+                APIService.catchError({ res, req, error, dataError: null });
             });
         }
     });

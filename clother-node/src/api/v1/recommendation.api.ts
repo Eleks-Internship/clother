@@ -23,8 +23,7 @@ router.post('/recommendations', upload.single('image'), (req: express.Request, r
     const file = req.file;
 
     if (!file) {
-        const error = new Error('No File');
-        return res.send(error);
+        return res.status(500).json({ data: null, message: 'no file' });
     }
 
     const form = new FormData();
