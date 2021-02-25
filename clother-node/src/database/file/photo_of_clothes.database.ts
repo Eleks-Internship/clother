@@ -6,8 +6,13 @@ import fs from 'fs';
 import Database from '../database';
 import { mongodbUrl } from '../database_info';
 import mongoose from 'mongoose';
+import { ObjectID } from 'mongodb';
+import LogWithoutDatabaseService from '../../services/server-info/log/log_without_database.service';
+import File from '../../interface/object/file';
 
 export default class PhotoOfClothesDatabase extends Database {
+    private readonly database: string = "file";
+
     constructor() {
         super();
     }
@@ -56,7 +61,7 @@ export default class PhotoOfClothesDatabase extends Database {
         });
     }
 
-    public get(info: { filename: string }): Promise<any> {
+    public getFile(info: { filename: string }): Promise<any> {
         return new Promise<any>(async (resolve,  reject) => {
             (await this.grid()).files.findOne({ filename: info.filename }, async (err, file) => {
                 if (!file || file.length === 0) {
@@ -73,21 +78,83 @@ export default class PhotoOfClothesDatabase extends Database {
         });
     }
 
-    public getList(): Promise<boolean | any[]> {
-        return new Promise<boolean | any[]>(async (resolve, reject) => {
-            (await this.grid()).files.find().toArray((err, files) => {
-                if (!files || files.length === 0) {
-                    resolve(false);
-                } else {
-                    files.map(file => {
-                        if (file.contentType === 'image/jpeg' || file.contentType === 'image/png') {
-                            file.isImage = true;
-                        } else {
-                            file.isImage = false;
-                        }
-                    });
-                    resolve(files);
-                }
+    public get(info: { filename: string }): Promise<File | null> {
+        return new Promise((resolve, reject) => {
+            Database.connect().then(client => {
+                client.db(this.database).collection("uploads.files").findOne({
+                    filename: info.filename
+                }, (error: object, data: any) => {
+                    resolve(data ?? null);
+
+                    if (error) {
+                        const logWithoutDatabaseService: LogWithoutDatabaseService = new LogWithoutDatabaseService();
+                        logWithoutDatabaseService.logError({ message: error });
+
+                        reject(error);
+                    }
+                });
+
+                client.close();
+            }).catch(error => {
+                const logWithoutDatabaseService: LogWithoutDatabaseService = new LogWithoutDatabaseService();
+                logWithoutDatabaseService.logError({ message: error });
+
+                resolve(null);
+                reject(error);
+            });
+        });
+    }
+
+    public deleteChunk(filesId: ObjectID): Promise<boolean> {
+        return new Promise((resolve, reject) => {
+            Database.connect().then(client => {
+                client.db(this.database).collection("uploads.chunks").deleteMany({
+                    files_id: filesId
+                }, (error: object, data: any) => {
+                    resolve(data ? true : false);
+
+                    if (error) {
+                        const logWithoutDatabaseService: LogWithoutDatabaseService = new LogWithoutDatabaseService();
+                        logWithoutDatabaseService.logError({ message: error });
+
+                        reject(error);
+                    }
+                });
+
+                client.close();
+            }).catch(error => {
+                const logWithoutDatabaseService: LogWithoutDatabaseService = new LogWithoutDatabaseService();
+                logWithoutDatabaseService.logError({ message: error });
+
+                resolve(false);
+                reject(error);
+            });
+        });
+    }
+
+    public deleteFile(_id: ObjectID): Promise<boolean> {
+        return new Promise((resolve, reject) => {
+            Database.connect().then(client => {
+                client.db(this.database).collection("uploads.files").deleteOne({
+                    _id
+                }, (error: object, data: any) => {
+                    resolve(data ? true : false);
+
+                    if (error) {
+                        const logWithoutDatabaseService: LogWithoutDatabaseService = new LogWithoutDatabaseService();
+                        logWithoutDatabaseService.logError({ message: error });
+
+                        reject(error);
+                    }
+                });
+
+                client.close();
+            }).catch(error => {
+                const logWithoutDatabaseService: LogWithoutDatabaseService = new LogWithoutDatabaseService();
+                logWithoutDatabaseService.logError({ message: error });
+
+                resolve(false);
+                reject(error);
             });
         });
     }
