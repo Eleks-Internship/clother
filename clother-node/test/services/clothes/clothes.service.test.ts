@@ -10,15 +10,17 @@ describe('Test service clothes', () => {
     let name: string = "test"
     let photoName: string = "test";
     let urlForBuy: string = "test";
+    let infoOfClothes: { label: string, probability: string }[] = [{ label: "test", probability: "10" }];
     let _id: ObjectID;
 
     it('create', async () => {
         const clothesService: ClothesService = new ClothesService("clothes-test");
-        const clothes: Clothes | null = await clothesService.create({ name, photoName, urlForBuy, user });
+        const clothes: Clothes | null = await clothesService.create({ name, photoName, urlForBuy, infoOfClothes, user });
         if (clothes) {
             expect(clothes.name).to.eql(name);
             expect(clothes.photoName).to.eql(photoName);
             expect(clothes.urlForBuy).to.eql(urlForBuy);
+            expect(clothes.infoOfClothes).to.eql(infoOfClothes);
             expect(clothes.user).to.eql(user);
             _id = clothes._id;
         } else {
@@ -33,6 +35,7 @@ describe('Test service clothes', () => {
             expect(clothes.name).to.eql(name);
             expect(clothes.photoName).to.eql(photoName);
             expect(clothes.urlForBuy).to.eql(urlForBuy);
+            expect(clothes.infoOfClothes).to.eql(infoOfClothes);
             expect(clothes.user).to.eql(user);
         } else {
             expect(clothes).to.not.eql(null);
@@ -50,6 +53,7 @@ describe('Test service clothes', () => {
         expect(clothesList[0].name).to.eql(name);
         expect(clothesList[0].photoName).to.eql(photoName);
         expect(clothesList[0].urlForBuy).to.eql(urlForBuy);
+        expect(clothesList[0].infoOfClothes).to.eql(infoOfClothes);
         expect(clothesList[0].user).to.eql(user);
     });
 
