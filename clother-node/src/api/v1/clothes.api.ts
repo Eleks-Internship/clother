@@ -35,12 +35,11 @@ router.get('/clothes/:id/image', async (req: express.Request, res: express.Respo
     try {
         const clothes: Clothes | null = await clothesService.get(new ObjectID(req.params.id));
 
-        const photoOfClothesDatabase: PhotoOfClothesDatabase = new PhotoOfClothesDatabase();
         if (clothes) (await photoOfClothesDatabase.get({ filename: clothes?.photoName })).pipe(res);
     } catch(error) {
         const logWithDatabaseService: LogWithDatabaseService = new LogWithDatabaseService();
         logWithDatabaseService.logError({ message: error });
-    } 
+    }
 });
 
 router.post('/clothes', upload.single('image'), async (req: express.Request, res: express.Response) => {
