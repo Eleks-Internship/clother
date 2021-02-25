@@ -2,7 +2,9 @@
 html, body {
     margin: 0;
     padding: 0;
+  font-family: 'Truculenta', sans-serif;
 }
+
 
 form {
     input {
@@ -21,6 +23,12 @@ form {
         color: black;
         border: 1px solid black;
     }
+}
+
+hr{
+  background-color:#fff;
+  opacity: 1;
+  border-radius: 3px;
 }
 
 

@@ -18,4 +18,8 @@ describe('Test database collection', () => {
     it('delete look', async () => {
         expect(await CollectionDatabase.deleteLook()).to.eql(true);
     });
+
+    it('delete like for look', async () => {
+        expect(await CollectionDatabase.deleteLikeForLook()).to.eql(true);
+    });
 });

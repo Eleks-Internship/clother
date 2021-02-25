@@ -1,0 +1,33 @@
+Index: clother-node/test/services/clothes/clothes.service.test.ts
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/clother-node/test/services/clothes/clothes.service.test.ts b/clother-node/test/services/clothes/clothes.service.test.ts
+new file mode 100644
+--- /dev/null	(revision cf0873b9a20e57888fabe76675ac61e4d6be0052)
++++ b/clother-node/test/services/clothes/clothes.service.test.ts	(revision cf0873b9a20e57888fabe76675ac61e4d6be0052)
+@@ -0,0 +1,22 @@
++import { expect } from 'chai';
++
++import ClothesService from '../../../src/services/clothes/clothes.service';
++import Clothes from '../../../src/interface/object/clothes';
++
++describe('Test service clothes', () => {
++    const name: string = "test"
++    const photoName: string = "test";
++    const urlForBuy: string = "test";
++
++    it('create', async () => {
++        const clothesService: ClothesService = new ClothesService("clothes-test");
++        const clothes: Clothes | null = await clothesService.create({ name, photoName, urlForBuy });
++        if (clothes) {
++            expect(clothes.name).to.eql(name);
++            expect(clothes.photoName).to.eql(photoName);
++            expect(clothes.urlForBuy).to.eql(urlForBuy);
++        } else {
++            expect(clothes).to.not.eql(null);
++        }
++    });
++});
+\ No newline at end of file
