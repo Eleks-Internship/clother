@@ -1,3 +1,32 @@
 nav{
   border-radius:8px;
 }
+.option{
+  display: block;
+  margin-bottom:0.25em;
+  margin-left: 0.25em;
+
+}
+.check{
+  padding-left: 1.2em;
+}
+.check-input{
+  position: absolute;
+  -webkit-appearance: none;
+  appearance: none;
+}
+.check-box{
+  position: absolute;
+  margin-left: -1.2em;
+  width: 1.2em;
+  height: 1.2em;
+
+
+  background-image: url("/../../../assets/img/blank-check-box.svg");
+}
+.check-input:checked+.check-box{
+
+  background-image: url("/../../../assets/img/checked-box.svg");
+
+}
+

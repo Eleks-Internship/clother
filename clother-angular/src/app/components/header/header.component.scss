@@ -4,15 +4,36 @@
   border: 0;
   height:50px;
   fill:#656E6E;
+
 }
 .btn-page:hover {
   background-color:#656E6E;
   fill:#D2D2D2;
 }
+
 header{
   border-radius:8px;
   padding:50px;
 
 }
+.search{
+  color: #656E6E;
+  padding: 12px;
+  width:300px;
+  border: none;
+  background: none;
+}
+.search:hover{
+ color:#D2D2D2;
 
+}
+.btn-page:hover #search{
+  color: #D2D2D2;
+}
+.search:hover::placeholder{
+  color: #D2D2D2;
+}
+.btn-page:hover #search::placeholder{
+  color: #D2D2D2;
+}
 

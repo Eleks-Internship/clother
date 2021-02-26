@@ -1,0 +1,19 @@
+.check{
+  padding-left: 1.2em;
+}
+.check-input{
+  -webkit-appearance: none;
+}
+.check-box{
+ position: absolute;
+  margin-left: -1.2em;
+  width: 1.2em;
+  height: 1.2em;
+
+  background-image: url("/../../../assets/img/like-2.svg");
+}
+.check-input:checked+.check-box{
+
+  background-image: url("/../../../assets/img/like.svg");
+
+}
