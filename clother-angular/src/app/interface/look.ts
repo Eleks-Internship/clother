@@ -1,5 +1,5 @@
-import { Clothes } from "./clothes";
-import { User } from "./user";
+import { Clothes } from './clothes';
+import { User } from './user';
 
 export interface Look {
     readonly _id: string;

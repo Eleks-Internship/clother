@@ -1,5 +1,5 @@
-import { Look } from "./look";
-import { User } from "./user";
+import { Look } from './look';
+import { User } from './user';
 
 export interface LikeForLook {
     readonly _id: string;
