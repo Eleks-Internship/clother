@@ -6,6 +6,7 @@ import Get from "../../interface/class/get";
 import GetListofUser from "../../interface/class/get_list_of_user";
 import Update from "../../interface/class/update";
 import Clothes from "../../interface/object/clothes";
+import PhotoOfClothesService from "../file/photo_of_clothes.service";
 
 export default class ClothesService implements Create<Clothes>, Get<Clothes>, GetListofUser<Clothes>, Update, Delete {
     private readonly clothesDatabase: ClothesDatabase;
@@ -31,6 +32,13 @@ export default class ClothesService implements Create<Clothes>, Get<Clothes>, Ge
     }
 
     public async delete(_id: ObjectID): Promise<boolean> {
+        const photoOfClothesService: PhotoOfClothesService = new PhotoOfClothesService();
+        const isDeleteFile = await photoOfClothesService.delete(_id);
+
+        if (!isDeleteFile) {
+            return false;
+        }
+
         return this.clothesDatabase.delete(_id);
     }
 }

@@ -6,7 +6,7 @@ import 'mocha';
 chai.use(chaiHttp);
 
 const server: string = process.env.SERVER || 'localhost';
-const port: string | number = process.env.PORT || 3000;
+const port: string | number = process.env.PORT || 8080;
 
 describe('Test api look', () => {
     const user: { _id: ObjectID } = { _id: new ObjectID('6015a18c923e0e3b6442751c') };

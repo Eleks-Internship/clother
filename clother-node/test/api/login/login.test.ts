@@ -5,7 +5,7 @@ import 'mocha';
 chai.use(chaiHttp);
 
 const server: string = process.env.SERVER || 'localhost';
-const port: string | number = process.env.PORT || 3000;
+const port: string | number = process.env.PORT || 8080;
 
 describe('Test api login', () => {
     const firstName: string = 'firstName';

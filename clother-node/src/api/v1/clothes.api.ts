@@ -35,7 +35,7 @@ router.get('/clothes/:id/image', async (req: express.Request, res: express.Respo
     try {
         const clothes: Clothes | null = await clothesService.get(new ObjectID(req.params.id));
 
-        if (clothes) (await photoOfClothesDatabase.get({ filename: clothes?.photoName })).pipe(res);
+        if (clothes) (await photoOfClothesDatabase.getFile({ filename: clothes?.photoName })).pipe(res);
     } catch(error) {
         const logWithDatabaseService: LogWithDatabaseService = new LogWithDatabaseService();
         logWithDatabaseService.logError({ message: error });
