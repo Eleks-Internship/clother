@@ -8,6 +8,8 @@ import ClothesService from '../../services/clothes/clothes.service';
 import { ObjectID } from 'mongodb';
 import PhotoOfClothesDatabase from '../../database/file/photo_of_clothes.database';
 import FormData from 'form-data';
+import Clothes from '../../interface/object/clothes';
+import LogWithDatabaseService from '../../services/server-info/log/log_without_database.service';
 
 const router: express.Router = express.Router();
 
@@ -24,6 +26,19 @@ router.get('/clothes/:id', async (req: express.Request, res: express.Response) =
         APIService.processingOnAPIOfDataModels({ req, res, method: clothesService.get(new ObjectID(req.params.id)), dataError: null });
     } catch (error) {
         APIService.catchError({ res, req, error, dataError: null });
+    }
+});
+
+router.get('/clothes/:id/image', async (req: express.Request, res: express.Response) => {
+    const clothesService: ClothesService = new ClothesService();
+
+    try {
+        const clothes: Clothes | null = await clothesService.get(new ObjectID(req.params.id));
+
+        if (clothes) (await photoOfClothesDatabase.get({ filename: clothes?.photoName })).pipe(res);
+    } catch(error) {
+        const logWithDatabaseService: LogWithDatabaseService = new LogWithDatabaseService();
+        logWithDatabaseService.logError({ message: error });
     }
 });
 
