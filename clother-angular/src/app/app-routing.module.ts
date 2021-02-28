@@ -3,22 +3,21 @@ import { Routes, RouterModule } from '@angular/router';
 import { LoginGuard } from './guards/login.guard';
 import { LoginComponent } from './pages/login/login.component';
 import { SignUpComponent } from './pages/sign-up/sign-up.component';
-import {TrendsComponent} from './pages/trends/trends.component';
-import {LikelistComponent} from './pages/likelist/likelist.component';
-import {RecommendationsComponent} from './pages/recommendations/recommendations.component';
-import {MainpageComponent} from './pages/mainpage/mainpage.component';
-import {AppComponent} from './app.component';
+import { TrendsComponent } from './pages/trends/trends.component';
+import { LikelistComponent } from './pages/likelist/likelist.component';
+import { RecommendationsComponent } from './pages/recommendations/recommendations.component';
+import { MainpageComponent } from './pages/mainpage/mainpage.component';
 
 
 
 
 const routes: Routes = [
-  { path: '', component: MainpageComponent },
+  { path: '', canActivate: [ LoginGuard ], component: MainpageComponent },
   { path: 'sign-up', component: SignUpComponent },
   { path: 'login', component: LoginComponent },
-  { path: 'trends', component: TrendsComponent },
-  { path: 'likelist', component: LikelistComponent },
-  { path: 'recommendations', component: RecommendationsComponent }
+  { path: 'trends', canActivate: [ LoginGuard ], component: TrendsComponent },
+  { path: 'likelist', canActivate: [ LoginGuard ], component: LikelistComponent },
+  { path: 'recommendations', canActivate: [ LoginGuard ], component: RecommendationsComponent }
 
 ];
 
