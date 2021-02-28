@@ -27,7 +27,14 @@ export default class ClothesService implements Create<Clothes>, Get<Clothes>, Ge
         return this.clothesDatabase.getListOfUser(info);
     }
 
-    public async update(info: { _id: ObjectID, data: { name: string, photoName: string, urlForBuy?: string } }): Promise<boolean> {
+    public async update(info: { _id: ObjectID, data: { name: string, photoName: string, urlForBuy?: string, infoOfClothes?: { label: string, probability: string }[] } }): Promise<boolean> {
+        const photoOfClothesService: PhotoOfClothesService = new PhotoOfClothesService();
+        const isDeleteFile = await photoOfClothesService.delete(info._id);
+
+        if (!isDeleteFile) {
+            return false;
+        }
+
         return this.clothesDatabase.update(info);
     }
 

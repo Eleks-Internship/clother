@@ -82,16 +82,44 @@ router.post('/clothes', upload.single('image'), async (req: express.Request, res
     });
 });
 
-router.put('/clothes', async (req: express.Request, res: express.Response) => {
+router.put('/clothes', upload.single('image'), async (req: express.Request, res: express.Response) => {
     if (!req.body) return res.status(400).send({ data: null, message: 'user did not enter data in the form' });
 
-    const clothesService: ClothesService = new ClothesService();
-
-    try {
-        APIService.processingOnAPIOfDataModels({ req, res, method: clothesService.update({ _id: new ObjectID(req.body.id), data: { name: req.body.name, photoName: req.body.photoName, urlForBuy: req.body.urlForBuy } }), dataError: false });
-    } catch (error) {
-        APIService.catchError({ res, req, error, dataError: false });
+    if (!req.file) {
+        return res.status(500).json({ data: null, message: 'no file' });
     }
+
+    photoOfClothesDatabase.downoladFile({ filename: req.file.filename }).then(access => {
+        if (access) {
+            const form = new FormData();
+            const buffer = fs.createReadStream(`image/recommendation/${req.file.filename}`);
+
+            form.append('image', buffer, {
+                contentType: 'text/plain',
+                filename: req.file.originalname,
+            });
+
+            fetch("https://flask-models-n6vwx54efa-uc.a.run.app/predict", {
+                method: 'POST',
+                body: form,
+                headers: { 'Authorization': 'Basic YWxhZGRpbjpvcGVuc2VzYW1lljrhebgervwekbflisufbewyufewfsngsdbgrrldngsufigbeurgb' },
+            })
+            .then(response => response.json())
+            .then(json => {
+                fs.unlinkSync(`image/recommendation/${req.file.filename}`);
+
+                const clothesService: ClothesService = new ClothesService();
+
+                try {
+                    APIService.processingOnAPIOfDataModels({ req, res, method: clothesService.update({ _id: new ObjectID(req.body.id), data: { name: req.body.name, photoName: req.file.filename, urlForBuy: req.body.urlForBuy, infoOfClothes: json.predictions, } }), dataError: false });
+                } catch (error) {
+                    APIService.catchError({ res, req, error, dataError: false });
+                }
+            }).catch(error => {
+                APIService.catchError({ res, req, error, dataError: null });
+            });
+        }
+    });
 });
 
 router.delete('/clothes/:id', async (req: express.Request, res: express.Response) => {
