@@ -6,6 +6,10 @@ export default interface Clothes {
     name: string;
     photoName: string;
     urlForBuy?: string;
+    infoOfClothes?: {
+        label: string;
+        probability: string;
+    }[];
     readonly user: User | { _id: ObjectID; };
     readonly dateOfCreation: Date;
 }

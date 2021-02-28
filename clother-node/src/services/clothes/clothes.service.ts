@@ -14,7 +14,7 @@ export default class ClothesService implements Create<Clothes>, Get<Clothes>, Ge
         this.clothesDatabase = new ClothesDatabase(collection);
     }
 
-    public async create(info: { name: string, photoName: string, urlForBuy: string, user: { _id: ObjectID } }): Promise<Clothes | null> {
+    public async create(info: { name: string, photoName: string, urlForBuy?: string, infoOfClothes?: { label: string, probability: string }[], user: { _id: ObjectID } }): Promise<Clothes | null> {
         return this.clothesDatabase.create(info);
     }
 
@@ -26,7 +26,7 @@ export default class ClothesService implements Create<Clothes>, Get<Clothes>, Ge
         return this.clothesDatabase.getListOfUser(info);
     }
 
-    public async update(info: { _id: ObjectID, data: { name: string, photoName: string, urlForBuy: string } }): Promise<boolean> {
+    public async update(info: { _id: ObjectID, data: { name: string, photoName: string, urlForBuy?: string } }): Promise<boolean> {
         return this.clothesDatabase.update(info);
     }
 

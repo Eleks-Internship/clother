@@ -1,5 +1,7 @@
 import express from 'express';
 import http from 'http';
+import path from 'path';
+import fs from 'fs';
 import cors from 'cors';
 
 import api from './api/api';
@@ -11,6 +13,8 @@ const port: string | number = process.env.PORT || 8080;
 app.use(cors());
 
 app.use('/api', api);
+if (!fs.existsSync("./image")) fs.mkdirSync("./image");
+if (!fs.existsSync("./image/recommendation")) fs.mkdirSync("./image/recommendation");
 
 const server: http.Server = http.createServer(app);
 server.listen(port, () => {

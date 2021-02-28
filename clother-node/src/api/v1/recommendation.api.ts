@@ -1,7 +1,6 @@
 import express from 'express';
 import fs from 'fs';
 import multer from 'multer';
-import request from 'request';
 import fetch from 'node-fetch';
 import FormData from 'form-data';
 
@@ -24,8 +23,7 @@ router.post('/recommendations', upload.single('image'), (req: express.Request, r
     const file = req.file;
 
     if (!file) {
-        const error = new Error('No File');
-        return res.send(error);
+        return res.status(500).json({ data: null, message: 'no file' });
     }
 
     const form = new FormData();
@@ -42,7 +40,11 @@ router.post('/recommendations', upload.single('image'), (req: express.Request, r
         headers: { 'Authorization': 'Basic YWxhZGRpbjpvcGVuc2VzYW1lljrhebgervwekbflisufbewyufewfsngsdbgrrldngsufigbeurgb' },
     })
     .then(response => response.json())
-    .then(json => res.json({ data: json }));
+    .then(json => {
+        res.json({ data: json });
+
+        fs.unlinkSync(`image/recommendation/FunOfHeuristic_${file.originalname}`);
+    });
 });
 
 export default router;
