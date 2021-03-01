@@ -1,78 +1,70 @@
-
-<nav class="  navbar  navbar-expand-sm navbar-light bg-light  "style="border-radius:10px ;"  >
-  <div class="collapse navbar-collapse  " id="navbarContent">
-    <ul class="navbar-nav   mx-auto d-flex flex-column bd-highlight    " >
+<section class="  navbar  navbar-expand-sm navbar-light bg-light  "style="border-radius:10px ;">
+  <div class="collapse navbar-collapse" id="navbarContent">
+    <ul class="navbar-nav   mx-auto d-flex flex-column bd-highlight">
 
       <!-- <img class="logo mx-auto m-1 " style="width: 12rem;  height: 9rem;" src="assets/img/logoClother.png"  > -->
 
       <h3 href="" class="nav-link">All CATEGORIES</h3>
 
-
-
-      <label class=" form-check   " >
-        <input class="form-check-input nav-link" type="checkbox" value="" >
+      <label class="form-check">
+        <input class="form-check-input nav-link" type="checkbox" value="bags" (change)="filter.bags = !filter.bags; sendFilter();">
         BAGS
       </label>
 
 
-      <label class=" form-check " >
-        <input class="form-check-input nav-link " type="checkbox" value="" >
+      <label class="form-check">
+        <input class="form-check-input nav-link" type="checkbox" value="dresses" (change)="filter.dresses = !filter.dresses; sendFilter();">
         DRESSES
       </label>
 
-      <label class=" form-check   " >
-        <input class="form-check-input nav-link" type="checkbox" value="" >
+      <label class="form-check" >
+        <input class="form-check-input nav-link" type="checkbox" value="shoes" (change)="filter.shoes = !filter.shoes; sendFilter();">
         SHOES
       </label>
 
 
-      <label class=" form-check " >
-        <input class="form-check-input nav-link " type="checkbox" value="" >
+      <label class=" form-check">
+        <input class="form-check-input nav-link" type="checkbox" value="caps" (change)="filter.caps = !filter.caps; sendFilter();">
         CAPS
       </label>
 
-      <label class=" form-check   " >
-        <input class="form-check-input nav-link" type="checkbox" value="" >
+      <label class="form-check">
+        <input class="form-check-input nav-link" type="checkbox" value="coats" (change)="filter.coats = !filter.coats; sendFilter();">
         COATS
       </label>
 
 
-      <label class=" form-check " >
-        <input class="form-check-input nav-link " type="checkbox" value="" >
+      <label class="form-check">
+        <input class="form-check-input nav-link" type="checkbox" value="pants" (change)="filter.pants = !filter.pants; sendFilter();">
         PANTS
       </label>
-      <label class=" form-check   " >
-        <input class="form-check-input nav-link" type="checkbox" value="" >
+      <label class="form-check">
+        <input class="form-check-input nav-link" type="checkbox" value="shorts" (change)="filter.shorts = !filter.shorts; sendFilter();">
         SHORTS
       </label>
 
 
-      <label class=" form-check " >
-        <input class="form-check-input nav-link " type="checkbox" value="" >
+      <label class="form-check">
+        <input class="form-check-input nav-link " type="checkbox" value="skirts" (change)="filter.skirts = !filter.skirts; sendFilter();">
         SKIRTS
       </label>
 
-      <label class=" form-check   " >
-        <input class="form-check-input nav-link" type="checkbox" value="" >
+      <label class="form-check">
+        <input class="form-check-input nav-link" type="checkbox" value="t_shorts" (change)="filter.t_shorts = !filter.t_shorts; sendFilter();">
         T-SHOTRTS
       </label>
 
 
-      <label class=" form-check " >
-        <input class="form-check-input nav-link " type="checkbox" value="" >
+      <label class="form-check">
+        <input class="form-check-input nav-link" type="checkbox" value="sweaters" (change)="filter.sweaters = !filter.sweaters; sendFilter();">
         SWEATERS
       </label>
 
-      <label class=" form-check " >
-        <input class="form-check-input nav-link " type="checkbox" value="" >
+      <label class="form-check">
+        <input class="form-check-input nav-link" type="checkbox" value="raincoars" (change)="filter.raincoars = !filter.raincoars; sendFilter();">
         RAINCOARS
       </label>
 
     </ul>
-
-
   </div>
-
-
-</nav>
-
+</section>
