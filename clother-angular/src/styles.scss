@@ -41,7 +41,7 @@ hr{
 }
 
 .background-gradient {
-    background: linear-gradient(0.25turn, #677BF8, #368060);
+    background:#AAAAAA;
 }
 
 .flex-space-between {
@@ -62,4 +62,15 @@ hr{
     width: calc(90% - 40px);
     background-color: white;
     padding: 20px;
+}
+.btn {
+  color: #656E6E;
+  font-size: 28px;
+  width: 200px;
+  height: 50px;
+}
+.btn-f{
+  color: #656E6E;
+  margin: 5px;
+  font-size: 25px;
 }

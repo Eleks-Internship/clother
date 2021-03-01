@@ -23,6 +23,7 @@ import { LookbookComponent } from './components/lookbook/lookbook.component';
 import { RecommendationsComponent } from './pages/recommendations/recommendations.component';
 import { LikelistComponent } from './pages/likelist/likelist.component';
 import { MainpageComponent } from './pages/mainpage/mainpage.component';
+import { UserpageComponent } from './pages/userpage/userpage.component';
 
 
 @NgModule({
@@ -42,6 +43,7 @@ import { MainpageComponent } from './pages/mainpage/mainpage.component';
     RecommendationsComponent,
     LikelistComponent,
     MainpageComponent,
+    UserpageComponent,
   ],
   imports: [
     BrowserModule,

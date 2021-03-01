@@ -18,10 +18,11 @@ header{
 }
 .search{
   color: #656E6E;
-  padding: 12px;
-  width:300px;
+  padding: 11px;
+  width:270px;
   border: none;
   background: none;
+  padding-right: 50px;
 }
 .search:hover{
  color:#D2D2D2;
@@ -36,4 +37,9 @@ header{
 .btn-page:hover #search::placeholder{
   color: #D2D2D2;
 }
+.op{
+  position: absolute;
+margin-left: -50px;
+}
+
 

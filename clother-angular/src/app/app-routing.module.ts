@@ -7,6 +7,7 @@ import {TrendsComponent} from './pages/trends/trends.component';
 import {LikelistComponent} from './pages/likelist/likelist.component';
 import {RecommendationsComponent} from './pages/recommendations/recommendations.component';
 import {MainpageComponent} from './pages/mainpage/mainpage.component';
+import {UserpageComponent} from './pages/userpage/userpage.component';
 import {AppComponent} from './app.component';
 
 
@@ -15,6 +16,7 @@ import {AppComponent} from './app.component';
 const routes: Routes = [
   { path: '', component: MainpageComponent },
   { path: 'sign-up', component: SignUpComponent },
+  { path: 'user-page', component: UserpageComponent },
   { path: 'login', component: LoginComponent },
   { path: 'trends', component: TrendsComponent },
   { path: 'likelist', component: LikelistComponent },

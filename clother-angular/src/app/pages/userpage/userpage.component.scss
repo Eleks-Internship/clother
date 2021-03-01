@@ -1,0 +1,43 @@
+.Clother{
+
+  border-radius:8px;
+  width: auto;
+}
+.co{
+  background-color: #656E6E;
+  margin: 5px;
+}
+.user-photo{
+  margin: 10px;
+  border-radius: 8px;
+  background-color:#656E6E;
+  fill:#D2D2D2;
+
+}
+.btn-upload{
+  border: 0;
+  color: #D2D2D2;
+  margin-top: -50px;
+  height: 50px;
+  background-color:#464D4D;
+  opacity: .9;
+  border-radius:0 0 8px 8px;
+}
+.edit{
+  display: flex;
+  justify-content: flex-end;
+  margin-top: -40px;
+}
+.btn-e{
+  font-size: 20px;
+  background-color: #D2D2D2;
+  color: #656E6E;
+  height: 40px;
+  width: 100px;
+  margin-bottom: 10px;
+  margin-right: 15px;
+}
+p{
+  font-size: 20px;
+  margin: 0;
+}
