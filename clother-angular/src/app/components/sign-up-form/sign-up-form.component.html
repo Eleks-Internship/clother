@@ -1,23 +1,23 @@
 <form [formGroup]="form" (ngSubmit)="sendForm(form.value)">
     <div>
-        <input type="text" name="lastName" id="lastName" formControlName="lastName" placeholder="Прізвище...">
+        <input type="text" name="lastName" id="lastName" formControlName="lastName" placeholder="Last name...">
     </div>
 
     <div>
-        <input type="text" name="firstName" id="firstName" formControlName="firstName" placeholder="Ім'я...">
+        <input type="text" name="firstName" id="firstName" formControlName="firstName" placeholder="Name...">
     </div>
 
     <div>
-        <input type="email" name="email" id="email" formControlName="email" placeholder="Пошта...">
+        <input type="email" name="email" id="email" formControlName="email" placeholder="Email...">
     </div>
 
     <div>
-        <input type="password" name="password" id="password" formControlName="password" placeholder="Пароль...">
+        <input type="password" name="password" id="password" formControlName="password" placeholder="Password...">
     </div>
 
     <div>
-        <input type="password" name="confirmPassword" id="confirmPassword" formControlName="confirmPassword" placeholder="Пітвердіть пароль...">
+        <input type="password" name="confirmPassword" id="confirmPassword" formControlName="confirmPassword" placeholder="Confirm password...">
     </div>
 
-    <button type="submit" [disabled]="!form.valid">Створити акаунт</button>
+    <button type="submit" [disabled]="!form.valid">Create an account</button>
 </form>
