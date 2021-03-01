@@ -27,7 +27,7 @@ export class NavigationComponent implements OnInit {
       t_shorts: false,
       sweaters: false,
       raincoars: false
-    }
+    };
   }
 
   sendFilter(): void {

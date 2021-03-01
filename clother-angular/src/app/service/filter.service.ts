@@ -1,19 +1,20 @@
 import { Injectable } from '@angular/core';
+import { Clothes } from '../interface/clothes';
 import { Filter } from '../interface/filter';
 
 @Injectable({
   providedIn: 'root'
 })
 export class FilterService {
-  public static _filter: Filter;
+  public static dataFilter: Filter;
 
   constructor() { }
 
   public set filter(info: Filter) {
-    FilterService._filter = info;
+    FilterService.dataFilter = info;
   }
 
-  public get filter() {
-    return FilterService._filter;
+  public get filter(): Filter {
+    return FilterService.dataFilter;
   }
 }
