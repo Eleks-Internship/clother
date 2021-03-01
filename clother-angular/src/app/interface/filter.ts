@@ -8,7 +8,7 @@ export interface Filter {
     shorts: boolean;
     skirts: boolean;
     /* tslint:disable */
-    t_shorts: boolean;
+    t_shirts: boolean;
     /* tslint:enable */
     sweaters: boolean;
     raincoars: boolean;

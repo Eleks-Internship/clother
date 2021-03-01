@@ -1,3 +1,7 @@
-<section class="row" >
-  <app-look-form class="col-4" [clothes]="clothes" *ngFor="let clothes of clothesList"></app-look-form>
+<section class="row">
+  <div class="col-4" *ngFor="let clothes of clothesList">
+    <app-look-form [clothes]="clothes" (click)="showClothesMode = true"></app-look-form>
+
+    <app-clothes-more [clothes]="clothes" [show]="showClothesMode" (closed)="showClothesMode = false"></app-clothes-more>
+  </div>
 </section>

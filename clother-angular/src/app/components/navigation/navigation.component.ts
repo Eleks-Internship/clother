@@ -24,7 +24,7 @@ export class NavigationComponent implements OnInit {
       pants: false,
       shorts: false,
       skirts: false,
-      t_shorts: false,
+      t_shirts: false,
       sweaters: false,
       raincoars: false
     };

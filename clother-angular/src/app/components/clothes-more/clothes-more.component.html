@@ -1,0 +1,15 @@
+<section *ngIf="show">
+    <div class="center-1">
+        <div class="center-2">
+            <div class="center-3 popup">
+                <app-look-form [clothes]="clothes"></app-look-form>
+        
+                <div class="flex-space-around">
+                    <button type="button" (click)="editClothes()">Редагувати</button>
+                    <button type="button" (click)="deleteClothes()">Видалити</button>
+                    <button type="button" (click)="closedPopup()">Закрити</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

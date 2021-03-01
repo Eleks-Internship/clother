@@ -25,6 +25,7 @@ import { LikelistComponent } from './pages/likelist/likelist.component';
 import { MainpageComponent } from './pages/mainpage/mainpage.component';
 import { CreateClothesComponent } from './components/create-clothes/create-clothes.component';
 import { ClothesFormComponent } from './components/clothes-form/clothes-form.component';
+import { ClothesMoreComponent } from './components/clothes-more/clothes-more.component';
 
 
 @NgModule({
@@ -46,6 +47,7 @@ import { ClothesFormComponent } from './components/clothes-form/clothes-form.com
     MainpageComponent,
     CreateClothesComponent,
     ClothesFormComponent,
+    ClothesMoreComponent,
   ],
   imports: [
     BrowserModule,
