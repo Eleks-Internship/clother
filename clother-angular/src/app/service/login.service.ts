@@ -1,7 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
+import { User } from '../interface/user';
 import { HttpService } from './http.service';
 
 @Injectable({
@@ -27,6 +29,10 @@ export class LoginService {
       },
       error => this.httpService.processingOfStatus(error.status)
     );
+  }
+
+  public getUser(): Observable<{ data: User | null }> {
+    return this.http.get<{ data: User | null}>(environment.urlForServer + '/api/v1/login');
   }
 
 

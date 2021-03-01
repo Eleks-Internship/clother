@@ -4,6 +4,8 @@
   border: 0;
   height:50px;
   fill:#656E6E;
+  margin-right: 5px;
+  margin-left: 5px;
 }
 .btn-page:hover {
   background-color:#656E6E;
@@ -13,6 +15,12 @@ header{
   border-radius:8px;
   padding:50px;
 
+}
+
+#search {
+  width:330px;
+  padding-left: 20px;
+  padding-right: 20px;
 }
 
 

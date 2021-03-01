@@ -1,0 +1,20 @@
+section {
+    display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+}
+
+.center-1 { 
+    background-color: rgba(0, 0, 0, 0.6);
+}
+
+.popup {
+    max-width: 800px;
+    width: 94%;
+    background-color: darkgray;
+    border: 3px solid black;
+    padding: 20px 30px;
+}

@@ -1,0 +1,13 @@
+<section *ngIf="show">
+    <div class="center-1">
+        <div class="center-2">
+            <div class="center-3 popup">
+                <h1>Upload your clothes</h1>
+            
+                <app-clothes-form (send)="save($event)"></app-clothes-form>
+        
+                <button type="submit" (click)="show = false; closed.emit(false)">Закрити</button>
+            </div>
+        </div>
+    </div>
+</section>

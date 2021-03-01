@@ -53,13 +53,20 @@ router.post('/looks', async (req: express.Request, res: express.Response) => {
 
     const lookService: LookService = new LookService();
 
+    const loginService: LoginService = new LoginService();
+    const userID: ObjectID | null = await loginService.getIdOfUserLogin({ token: req.headers.authorization });
+
+    if (!userID) {
+        return res.status(401).json({ data: null });
+    }
+
     const clothesList: { _id: ObjectID }[] = await Promise.all<{ _id: ObjectID }>((req.body.clothes).map((clothes: { _id: string } | { _id: ObjectID }) => {
         clothes._id = new ObjectID(clothes._id);
         return Promise.resolve(clothes);
     }));
 
     try {
-        APIService.processingOnAPIOfDataModels({ req, res, method: lookService.create({ name: req.body.name, clothes: clothesList, user: { _id: new ObjectID(req.body.user._id) } }), dataError: null });
+        APIService.processingOnAPIOfDataModels({ req, res, method: lookService.create({ name: req.body.name, clothes: clothesList, user: { _id: userID } }), dataError: null });
     } catch(error) {
         APIService.catchError({ req, res, error, dataError: null });
     }

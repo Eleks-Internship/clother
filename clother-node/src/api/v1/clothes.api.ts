@@ -10,6 +10,7 @@ import PhotoOfClothesDatabase from '../../database/file/photo_of_clothes.databas
 import FormData from 'form-data';
 import Clothes from '../../interface/object/clothes';
 import LogWithDatabaseService from '../../services/server-info/log/log_without_database.service';
+import LoginService from '../../services/auth/login.service';
 
 const router: express.Router = express.Router();
 
@@ -49,6 +50,13 @@ router.post('/clothes', upload.single('image'), async (req: express.Request, res
         return res.status(500).json({ data: null, message: 'no file' });
     }
 
+    const loginService: LoginService = new LoginService();
+    const userID: ObjectID | null = await loginService.getIdOfUserLogin({ token: req.headers.authorization });
+
+    if (!userID) {
+        return res.status(401).json({ data: null });
+    }
+
     photoOfClothesDatabase.downoladFile({ filename: req.file.filename }).then(access => {
         if (access) {
             const form = new FormData();
@@ -71,7 +79,7 @@ router.post('/clothes', upload.single('image'), async (req: express.Request, res
                 const clothesService: ClothesService = new ClothesService();
 
                 try {
-                    APIService.processingOnAPIOfDataModels({ req, res, method: clothesService.create({ name: req.body.name, photoName: req.file.filename, urlForBuy: req.body.urlForBuy, infoOfClothes: json.predictions, user: { _id: new ObjectID(req.body.user._id) }}), dataError: null });
+                    APIService.processingOnAPIOfDataModels({ req, res, method: clothesService.create({ name: req.body.name, photoName: req.file.filename, urlForBuy: req.body.urlForBuy, infoOfClothes: json.predictions, user: { _id: userID }}), dataError: null });
                 } catch (error) {
                     APIService.catchError({ res, req, error, dataError: null });
                 }
