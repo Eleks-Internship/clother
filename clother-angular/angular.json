@@ -134,6 +134,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "clother-angular"
+    }
+  },
+  "defaultProject": "clother-angular",
+  "cli": {
+    "analytics": false
+  }
 }
