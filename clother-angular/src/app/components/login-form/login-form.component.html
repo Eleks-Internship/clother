@@ -1,15 +1,15 @@
 <form [formGroup]="form" (ngSubmit)="sendForm(form.value)">
     <div>
-        <input type="email" name="email" id="email" formControlName="email" placeholder="Пошта...">
+        <input type="email" name="email" id="email" formControlName="email" placeholder="Email...">
     </div>
 
     <div>
-        <input type="password" name="password" id="password" formControlName="password" placeholder="Пароль...">
+        <input type="password" name="password" id="password" formControlName="password" placeholder="Password...">
     </div>
 
     <div class="flex-space-between">
-        <button type="submit" [disabled]="!form.valid">Увійти</button>
-        <button class="forgot-password" type="submit" [disabled]="!form.valid">Забули пароль?</button>
+        <button type="submit" [disabled]="!form.valid">Log in</button>
+        <button class="forgot-password" type="submit" [disabled]="!form.valid">Forgot password?</button>
     </div>
     
 </form>
