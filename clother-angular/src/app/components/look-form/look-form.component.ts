@@ -18,4 +18,8 @@ export class LookFormComponent implements OnInit {
     this.urlForServer = environment.urlForServer;
   }
 
+  like(): void {
+
+  }
+
 }
