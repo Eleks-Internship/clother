@@ -23,6 +23,9 @@ export class HttpService implements HttpInterceptor {
       case 400:
         alert('Ви не заповнили форму');
         break;
+      case 401:
+        alert('Ви не залогінилися в системі');
+        break;
       case 500:
         alert('Виникла помилка на сервері');
         break;

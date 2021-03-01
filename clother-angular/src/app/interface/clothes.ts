@@ -9,6 +9,6 @@ export interface Clothes {
         label: string;
         probability: string;
     }[];
-    readonly user: User | { _id: string; };
+    readonly user: User | { _id: string; lastName?: string; firstName?: string; };
     readonly dateOfCreation: Date;
 }

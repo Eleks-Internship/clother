@@ -1,8 +1,3 @@
 <section class="row" >
-  <app-look-form class="col-4 "></app-look-form>
-  <app-look-form class="col-4 "></app-look-form>
-  <app-look-form class="col-4"></app-look-form>
-  <app-look-form class="col-4 "></app-look-form>
-  <app-look-form class="col-4 "></app-look-form>
-  <app-look-form class="col-4"></app-look-form>
+  <app-look-form class="col-4" *ngFor="let object of clothesList"></app-look-form>
 </section>

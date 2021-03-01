@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { Clothes } from 'src/app/interface/clothes';
 
 @Component({
   selector: 'app-look-form',
@@ -6,6 +7,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./look-form.component.scss']
 })
 export class LookFormComponent implements OnInit {
+  @Input() clothes: Clothes;
 
   constructor() { }
 

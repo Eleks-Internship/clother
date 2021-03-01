@@ -1,20 +1,10 @@
 <section class="">
-  <div class="Create bg-light mt-2" style="height: 200px ;border-radius:8px;">
+  <div class="Create bg-light mt-2" style="height: 200px ;border-radius:8px;"></div>
 
+  <div *ngIf="clothesList.length !== 0">
+    <app-lookbook [list]="clothesList"></app-lookbook>
+    <button class="border-0 rounded mx-auto d-block bg-light" style="width: 200px; height: 50px"> Add clahtes </button>
+    <button class="border-0 rounded mx-auto d-block bg-light" style="width: 200px; height: 50px"> MORE </button>
   </div>
-  <div class="d-flex justify-content-between mt-2 " style="height: 40px;">
-    <h1 class="  text-light">Clohtes</h1>
-  </div>
-  <hr size="6" >
-
-  <app-lookbook></app-lookbook>
-  <button class="border-0 rounded mx-auto d-block bg-light" style="width: 200px; height: 50px"> Add clahtes </button>
-  <div class="d-flex justify-content-between mt-2 " style="height: 40px;">
-    <h1 class="  text-light">Wardrobe</h1>
-  </div>
-  <hr size="6" >
-
-  <app-lookbook></app-lookbook>
-  <button class="border-0 rounded mx-auto d-block bg-light" style="width: 200px; height: 50px"> MORE </button>
-
+  
 </section>

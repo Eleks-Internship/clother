@@ -13,19 +13,19 @@ export class LikeService {
     private http: HttpClient
   ) { }
 
-  public create(info: { look: { _id: string } }): Observable<LikeForLook | null> {
-    return this.http.post<LikeForLook | null>(environment.urlForServer + '/api/v1/looks/' + info.look._id + '/like', {});
+  public create(info: { look: { _id: string } }): Observable<{ data: LikeForLook | null }> {
+    return this.http.post<{ data: LikeForLook | null }>(environment.urlForServer + '/api/v1/looks/' + info.look._id + '/like', {});
   }
 
-  public getListByUser(): Observable<LikeForLook[]> {
-    return this.http.get<LikeForLook[]>(environment.urlForServer + '/api/v1/like');
+  public getListByUser(): Observable< { data: LikeForLook[] }> {
+    return this.http.get<{ data: LikeForLook[] }>(environment.urlForServer + '/api/v1/like');
   }
 
-  public getListByLook(info: { look: { _id: string } }): Observable<LikeForLook[]> {
-    return this.http.get<LikeForLook[]>(environment.urlForServer + '/api/v1/looks/ ' + info.look._id + '/like');
+  public getListByLook(info: { look: { _id: string } }): Observable<{ data: LikeForLook[] }> {
+    return this.http.get<{ data: LikeForLook[] }>(environment.urlForServer + '/api/v1/looks/ ' + info.look._id + '/like');
   }
 
-  public delete(info: { _id: string }): Observable<boolean> {
-    return this.http.delete<boolean>(environment.urlForServer + '/api/v1/like/' + info._id);
+  public delete(info: { _id: string }): Observable< {data: boolean }> {
+    return this.http.delete<{ data: boolean }>(environment.urlForServer + '/api/v1/like/' + info._id);
   }
 }
