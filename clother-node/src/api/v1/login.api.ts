@@ -10,14 +10,14 @@ router.get('/login', async (req: express.Request, res: express.Response) => {
     const loginService: LoginService = new LoginService();
     const userService: UserService =  new UserService();
 
-    const idOfUserByLogin: ObjectID | null = await loginService.getIdOfUserLogin({ token: req.headers.authorization });
+    const userID: ObjectID | null = await loginService.getIdOfUserLogin({ token: req.headers.authorization });
 
-    if (!idOfUserByLogin) {
+    if (!userID) {
         return res.status(401).json({ data: null });
     }
 
     try {
-        APIService.processingOnAPIOfDataModels({req, res, method: userService.get(idOfUserByLogin), dataError: null});
+        APIService.processingOnAPIOfDataModels({req, res, method: userService.get(userID), dataError: null});
     } catch (error) {
         APIService.catchError({res, req, error, dataError: null});
     }
