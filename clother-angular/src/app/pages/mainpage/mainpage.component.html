@@ -3,8 +3,9 @@
 
   <div *ngIf="clothesList.length !== 0">
     <app-lookbook [list]="clothesList"></app-lookbook>
-    <button class="border-0 rounded mx-auto d-block bg-light" style="width: 200px; height: 50px"> Add clahtes </button>
-    <button class="border-0 rounded mx-auto d-block bg-light" style="width: 200px; height: 50px"> MORE </button>
+    <button class="border-0 rounded mx-auto d-block bg-light">MORE</button>
   </div>
-  
+
+  <button class="border-0 rounded mx-auto d-block bg-light" (click)="isShowOfCreateClothes = true">Add clothes</button>
+  <app-create-clothes [show]="isShowOfCreateClothes" (closed)="isShowOfCreateClothes = false"></app-create-clothes>
 </section>

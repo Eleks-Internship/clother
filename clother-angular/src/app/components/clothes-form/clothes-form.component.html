@@ -1,0 +1,18 @@
+<form [formGroup]="form" (ngSubmit)="sendForm(form.value)">
+    <div>
+        <label for="name">Ім'я</label>
+        <input type="text" name="name" id="name" formControlName="name">
+    </div>
+
+    <div>
+        <label for="image">Фотографія</label>
+        <input type="file" name="image" id="image" formControlName="image"  (change)="updateImage($event)">
+    </div>
+
+    <div>
+        <label for="urlForBuy"></label>
+        <input type="url" name="urlForBuy" id="urlForBuy" formControlName="urlForBuy">
+    </div>
+
+    <button type="submit" [disabled]="!form.disable">Надіслати</button>
+</form>

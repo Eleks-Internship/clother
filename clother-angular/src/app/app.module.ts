@@ -23,6 +23,8 @@ import { LookbookComponent } from './components/lookbook/lookbook.component';
 import { RecommendationsComponent } from './pages/recommendations/recommendations.component';
 import { LikelistComponent } from './pages/likelist/likelist.component';
 import { MainpageComponent } from './pages/mainpage/mainpage.component';
+import { CreateClothesComponent } from './components/create-clothes/create-clothes.component';
+import { ClothesFormComponent } from './components/clothes-form/clothes-form.component';
 
 
 @NgModule({
@@ -42,6 +44,8 @@ import { MainpageComponent } from './pages/mainpage/mainpage.component';
     RecommendationsComponent,
     LikelistComponent,
     MainpageComponent,
+    CreateClothesComponent,
+    ClothesFormComponent,
   ],
   imports: [
     BrowserModule,

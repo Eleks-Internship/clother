@@ -12,12 +12,15 @@ import { LoginService } from 'src/app/service/login.service';
 })
 export class MainpageComponent implements OnInit {
   clothesList: Clothes[] = [];
+  isShowOfCreateClothes: boolean;
 
   constructor(
     private httpService: HttpService,
     private loginService: LoginService,
     private clothesService: ClothesService
-  ) { }
+  ) {
+    this.isShowOfCreateClothes = false;
+  }
 
   ngOnInit(): void {
     this.getUser();
@@ -35,6 +38,7 @@ export class MainpageComponent implements OnInit {
   private getClothesList(info: { userId: string }): void {
     this.clothesService.getListForUser(info).subscribe(
       res => {
+        console.log(res.data);
         this.clothesList = res.data;
       },
       error => this.httpService.processingOfStatus(error.status)

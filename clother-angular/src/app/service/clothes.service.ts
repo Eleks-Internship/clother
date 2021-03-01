@@ -13,7 +13,7 @@ export class ClothesService {
     private http: HttpClient
   ) { }
 
-  public create(info: { name: string, image: any, urlForBuy: string, user: { _id: string } }): Observable<{ data: Clothes | null }> {
+  public create(info: { name: string, image: any, urlForBuy: string } | FormData): Observable<{ data: Clothes | null }> {
     return this.http.post<{ data: Clothes | null }>(environment.urlForServer + '/api/v1/clothes', info);
   }
 
