@@ -38,7 +38,6 @@ export class MainpageComponent implements OnInit {
   private getClothesList(info: { userId: string }): void {
     this.clothesService.getListForUser(info).subscribe(
       res => {
-        console.log(res.data);
         this.clothesList = res.data;
       },
       error => this.httpService.processingOfStatus(error.status)
