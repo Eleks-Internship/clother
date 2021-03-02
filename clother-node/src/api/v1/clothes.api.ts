@@ -11,6 +11,7 @@ import FormData from 'form-data';
 import Clothes from '../../interface/object/clothes';
 import LogWithDatabaseService from '../../services/server-info/log/log_without_database.service';
 import LoginService from '../../services/auth/login.service';
+import File from '../../interface/object/file';
 
 const router: express.Router = express.Router();
 
@@ -88,6 +89,37 @@ router.post('/clothes', upload.single('image'), async (req: express.Request, res
             });
         }
     });
+});
+
+router.post('/clothes/:id/recommendations', async (req: express.Request, res: express.Response) => {
+    if (!req.body) return res.status(400).send({ data: null, message: 'user did not enter data in the form' });
+
+    const clothesService: ClothesService = new ClothesService();
+    let clothes: Clothes | null = null;
+    try {
+        clothes = await clothesService.get(new ObjectID(req.params.id));
+    } catch (error) {
+        APIService.catchError({ res, req, error, dataError: false });
+    }
+
+    if (!clothes) return res.status(200).send({ data: [] });
+
+    const photoOfClothesDatabase: PhotoOfClothesDatabase = new PhotoOfClothesDatabase();
+    const photo: File | null = await photoOfClothesDatabase.get({ filename: clothes.photoName });
+
+    if (!photo) return res.status(200).send({ data: [] });
+
+    fetch("https://flask-models-n6vwx54efa-uc.a.run.app/recommend", {
+        method: 'POST',
+        headers: { 
+            'Authorization': 'Basic YWxhZGRpbjpvcGVuc2VzYW1lljrhebgervwekbflisufbewyufewfsngsdbgrrldngsufigbeurgb',
+            'DbName': 'images',
+            'CollName': 'filters',
+            'InputImageID': "6035a25d3d76e8699e29821a"
+        },
+    })
+    .then(response => response.json())
+    .then(json => res.json({ data: json }));
 });
 
 router.put('/clothes', upload.single('image'), async (req: express.Request, res: express.Response) => {

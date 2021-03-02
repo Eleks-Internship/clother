@@ -33,9 +33,12 @@ export class MainpageComponent implements OnInit, OnDestroy {
     this.getUser();
 
     this.interval = setInterval(() => {
-      this.filter = this.filterService.filter;
-      if (this.userId) {
-        this.getClothesList({ userId: this.userId });
+      if (this.filterService.filter !== undefined) {
+        this.filter = this.filterService.filter;
+        
+        if (this.userId) {
+          this.getClothesList({ userId: this.userId });
+        }
       }
     }, 3000);
   }

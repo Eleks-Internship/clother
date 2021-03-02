@@ -7,6 +7,10 @@ section {
     height: 100vh;
 }
 
+img {
+    width: 100%;
+}
+
 button {
     width: 100px;
 }
@@ -21,4 +25,10 @@ button {
     background-color: #f8f9fa;
     border: 3px solid black;
     padding: 20px 30px;
+}
+
+#get-remondation-btn {
+    display: block;
+    margin: 20px auto;
+
 }

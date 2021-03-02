@@ -9,12 +9,14 @@ import { environment } from 'src/environments/environment';
 })
 export class LookFormComponent implements OnInit {
   @Input() clothes: Clothes;
+  showClothesMode: boolean;
 
   urlForServer: string;
 
   constructor() { }
 
   ngOnInit(): void {
+    this.showClothesMode = false;
     this.urlForServer = environment.urlForServer;
   }
 

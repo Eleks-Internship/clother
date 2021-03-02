@@ -1,7 +1,5 @@
 <section class="row">
   <div class="col-4" style="padding: inherit" *ngFor="let clothes of clothesList">
-    <app-look-form [clothes]="clothes" (click)="showClothesMode = true"></app-look-form>
-
-    <app-clothes-more [clothes]="clothes" [show]="showClothesMode" (closed)="showClothesMode = false"></app-clothes-more>
+    <app-look-form [clothes]="clothes"></app-look-form>
   </div>
 </section>

@@ -8,12 +8,10 @@ import { Clothes } from 'src/app/interface/clothes';
 })
 export class LookbookComponent implements OnInit {
   @Input() clothesList: Clothes[];
-  showClothesMode: boolean;
 
   constructor() { }
 
   ngOnInit(): void {
-    this.showClothesMode = false;
   }
 
 }

@@ -22,6 +22,10 @@ export class LookService {
     return this.http.get<{ data: Look[] }>(environment.urlForServer + '/api/v1/looks');
   }
 
+  public getListRecommendations(info: { _id: string }): Observable<{ data: Look[] }> {
+    return this.http.post<{ data: Look[] }>(environment.urlForServer + '/api/v1/clothes/' + info._id + '/recommendations', {});
+  }
+
   public update(info: { id: string, name: string, clothes: Clothes[] | { _id: string }[] }): Observable< { data: boolean }> {
     return this.http.put< { data: boolean }>(environment.urlForServer + '/api/v1/looks', info);
   }

@@ -6,9 +6,9 @@ export interface Clothes {
     photoName: string;
     urlForBuy?: string;
     infoOfClothes?: {
-        label: string;
-        probability: string;
-    }[];
+        item: string;
+        tags: string[];
+    };
     readonly user: User | { _id: string; lastName?: string; firstName?: string; };
     readonly dateOfCreation: Date;
 }
