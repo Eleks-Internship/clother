@@ -104,18 +104,16 @@ router.post('/clothes/:id/recommendations', async (req: express.Request, res: ex
 
     if (!clothes) return res.status(200).send({ data: [] });
 
-    const photoOfClothesDatabase: PhotoOfClothesDatabase = new PhotoOfClothesDatabase();
-    const photo: File | null = await photoOfClothesDatabase.get({ filename: clothes.photoName });
+    // const photoOfClothesDatabase: PhotoOfClothesDatabase = new PhotoOfClothesDatabase();
+    // const photo: File | null = await photoOfClothesDatabase.get({ filename: clothes.photoName });
 
-    if (!photo) return res.status(200).send({ data: [] });
+    // if (!photo) return res.status(200).send({ data: [] });
 
     fetch("https://flask-models-n6vwx54efa-uc.a.run.app/recommend", {
         method: 'POST',
+        body: JSON.stringify(clothes.infoOfClothes),
         headers: { 
-            'Authorization': 'Basic YWxhZGRpbjpvcGVuc2VzYW1lljrhebgervwekbflisufbewyufewfsngsdbgrrldngsufigbeurgb',
-            'DbName': 'images',
-            'CollName': 'filters',
-            'InputImageID': "6035a25d3d76e8699e29821a"
+            'Authorization': 'Basic YWxhZGRpbjpvcGVuc2VzYW1lljrhebgervwekbflisufbewyufewfsngsdbgrrldngsufigbeurgb'
         },
     })
     .then(response => response.json())
