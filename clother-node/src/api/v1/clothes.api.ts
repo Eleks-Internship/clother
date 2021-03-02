@@ -11,7 +11,7 @@ import FormData from 'form-data';
 import Clothes from '../../interface/object/clothes';
 import LogWithDatabaseService from '../../services/server-info/log/log_without_database.service';
 import LoginService from '../../services/auth/login.service';
-import File from '../../interface/object/file';
+const request = require('request');
 
 const router: express.Router = express.Router();
 
@@ -104,20 +104,22 @@ router.post('/clothes/:id/recommendations', async (req: express.Request, res: ex
 
     if (!clothes) return res.status(200).send({ data: [] });
 
-    // const photoOfClothesDatabase: PhotoOfClothesDatabase = new PhotoOfClothesDatabase();
-    // const photo: File | null = await photoOfClothesDatabase.get({ filename: clothes.photoName });
+    const headers = {
+        "Authorization": "Basic YWxhZGRpbjpvcGVuc2VzYW1lljrhebgervwekbflisufbewyufewfsngsdbgrrldngsufigbeurgb",
+        "DbName": "images",
+        "CollName": "filters",
+    };
 
-    // if (!photo) return res.status(200).send({ data: [] });
-
-    fetch("https://flask-models-n6vwx54efa-uc.a.run.app/recommend", {
-        method: 'POST',
-        body: JSON.stringify(clothes.infoOfClothes),
-        headers: { 
-            'Authorization': 'Basic YWxhZGRpbjpvcGVuc2VzYW1lljrhebgervwekbflisufbewyufewfsngsdbgrrldngsufigbeurgb'
-        },
-    })
-    .then(response => response.json())
-    .then(json => res.json({ data: json }));
+    request.post({
+        url: "https://flask-models-n6vwx54efa-uc.a.run.app/recommend",
+        headers: headers,
+        json: clothes.infoOfClothes,
+    }, function optionalCallback(err: any, httpResponse: any, body: any, response: any) {
+        if (err) {
+            return console.error("upload failed:", err);
+        }
+        res.json({ data: body });
+    });
 });
 
 router.put('/clothes', upload.single('image'), async (req: express.Request, res: express.Response) => {
