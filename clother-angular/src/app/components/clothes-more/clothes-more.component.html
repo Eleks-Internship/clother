@@ -23,6 +23,8 @@
                 </div>
 
                 <button id="close-btn" type="button" (click)="closedPopup()">Закрити</button>
+
+                <app-edit-clothes [show]="showClothesMode" [clothes]="clothes" (closed)="showClothesMode = false"></app-edit-clothes>
             </div>
         </div>
     </div>

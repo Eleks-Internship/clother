@@ -25,11 +25,11 @@ export class ClothesService {
     return this.http.get<{ data: Clothes[] }>(environment.urlForServer + '/api/v1/users/' + info.userId + '/clothes');
   }
 
-  public update(info: { id: string, name: string, image: any, urlForBuy: string }): Observable<{ data: boolean }> {
+  public update(info: { id: string, name: string, image: any, urlForBuy: string } | FormData): Observable<{ data: boolean }> {
     return this.http.put<{ data: boolean }>(environment.urlForServer + '/api/v1/clothes', info);
   }
 
    public delete(info: { _id: string }): Observable<{ data: boolean }> {
-     return this.http.delete<{ data: boolean }>(environment.urlForServer + 'api/v1/clothes/' + info._id);
+     return this.http.delete<{ data: boolean }>(environment.urlForServer + '/api/v1/clothes/' + info._id);
    }
 }

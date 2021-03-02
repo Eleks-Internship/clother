@@ -26,6 +26,7 @@ import { MainpageComponent } from './pages/mainpage/mainpage.component';
 import { CreateClothesComponent } from './components/create-clothes/create-clothes.component';
 import { ClothesFormComponent } from './components/clothes-form/clothes-form.component';
 import { ClothesMoreComponent } from './components/clothes-more/clothes-more.component';
+import { EditClothesComponent } from './components/edit-clothes/edit-clothes.component';
 
 
 @NgModule({
@@ -48,6 +49,7 @@ import { ClothesMoreComponent } from './components/clothes-more/clothes-more.com
     CreateClothesComponent,
     ClothesFormComponent,
     ClothesMoreComponent,
+    EditClothesComponent,
   ],
   imports: [
     BrowserModule,

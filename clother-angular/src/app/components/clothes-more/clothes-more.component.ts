@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Clothes } from 'src/app/interface/clothes';
+import { ClothesService } from 'src/app/service/clothes.service';
 import { LookService } from 'src/app/service/look.service';
 import { environment } from 'src/environments/environment';
 
@@ -15,21 +16,34 @@ export class ClothesMoreComponent implements OnInit {
   @Output() closed = new EventEmitter<boolean>();
 
   urlForServer: string;
+  showClothesMode: boolean;
 
   constructor(
+    private clothesService: ClothesService,
     private lookService: LookService
   ) { }
 
   ngOnInit(): void {
     this.urlForServer = environment.urlForServer;
+    this.showClothesMode = false;
   }
 
   editClothes(): void {
-    console.log("edit");
+    this.showClothesMode = true;
   }
 
   deleteClothes(): void {
-    console.log('delete');
+    if (confirm("Видалити даний одяг")) {
+      this.clothesService.delete({ _id: this.clothes._id }).subscribe(
+        res => {
+          if (res.data) {
+            alert("Одяг було успішно видаленно");
+            window.location.reload();
+          }
+        },
+        error => console.error(error)
+      );
+    }
   }
 
   closedPopup(): void {
