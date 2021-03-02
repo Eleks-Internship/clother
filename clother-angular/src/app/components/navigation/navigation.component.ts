@@ -19,14 +19,14 @@ export class NavigationComponent implements OnInit {
       bags: false,
       dresses: false,
       shoes: false,
-      caps: false,
+      hats: false,
       coats: false,
       pants: false,
       shorts: false,
       skirts: false,
       t_shirts: false,
       sweaters: false,
-      raincoars: false
+      raincoats: false
     };
   }
 

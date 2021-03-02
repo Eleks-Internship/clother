@@ -18,6 +18,7 @@ export class MainpageComponent implements OnInit, OnDestroy {
   isShowOfCreateClothes: boolean;
 
   filter: Filter | undefined;
+  filterArray: string[] = [];
   interval: any;
 
   constructor(
@@ -33,8 +34,9 @@ export class MainpageComponent implements OnInit, OnDestroy {
     this.getUser();
 
     this.interval = setInterval(() => {
-      if (this.filterService.filter !== undefined) {
+      if (this.filterService.filter !== undefined && this.filterArray.toString() !== this.filterService.getFilter().toString()) {
         this.filter = this.filterService.filter;
+        this.filterArray = this.filterService.getFilter();
         
         if (this.userId) {
           this.getClothesList({ userId: this.userId });
@@ -66,7 +68,7 @@ export class MainpageComponent implements OnInit, OnDestroy {
           this.clothesList = res.data;
         } else {
           res.data.forEach(element => {
-            if (this.filter[element.infoOfClothes[1].label]) {
+            if (this.filter[element.infoOfClothes.item] || this.filterArray.length === 0) {
               this.clothesList.push(element);
             }
           });

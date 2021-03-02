@@ -20,11 +20,20 @@ export class ClothesFormComponent implements OnInit, OnChanges {
   ) { }
 
   ngOnInit(): void {
-    this.form = this.formBuilder.group({
-      name: [this.clothes.name ?? null, [Validators.required]],
-      image: [null, [Validators.required]],
-      urlForBuy: [this.clothes.urlForBuy ?? null],
-    });
+    if (this.clothes) {
+      this.form = this.formBuilder.group({
+        name: [this.clothes.name ?? null, [Validators.required]],
+        image: [null, [Validators.required]],
+        urlForBuy: [this.clothes.urlForBuy ?? null],
+      });
+    } else {
+      this.form = this.formBuilder.group({
+        name: [null, [Validators.required]],
+        image: [null, [Validators.required]],
+        urlForBuy: [null],
+      });
+    }
+    
   }
 
   ngOnChanges(): void {

@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { Clothes } from '../interface/clothes';
 import { Filter } from '../interface/filter';
 
 @Injectable({
@@ -16,5 +15,13 @@ export class FilterService {
 
   public get filter(): Filter {
     return FilterService.dataFilter;
+  }
+
+  public getFilter(): string[] {
+    const filterList: string[] = [];
+    for (const [key, value] of Object.entries(FilterService.dataFilter)) {
+      if (value) filterList.push(key);
+    }
+    return filterList;
   }
 }

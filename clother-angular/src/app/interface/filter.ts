@@ -2,7 +2,7 @@ export interface Filter {
     bags: boolean;
     dresses: boolean;
     shoes: boolean;
-    caps: boolean;
+    hats: boolean;
     coats: boolean;
     pants: boolean;
     shorts: boolean;
@@ -11,5 +11,5 @@ export interface Filter {
     t_shirts: boolean;
     /* tslint:enable */
     sweaters: boolean;
-    raincoars: boolean;
+    raincoats: boolean;
 }

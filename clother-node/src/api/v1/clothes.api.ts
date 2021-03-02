@@ -80,7 +80,7 @@ router.post('/clothes', upload.single('image'), async (req: express.Request, res
                 const clothesService: ClothesService = new ClothesService();
 
                 try {
-                    APIService.processingOnAPIOfDataModels({ req, res, method: clothesService.create({ name: req.body.name, photoName: req.file.filename, urlForBuy: req.body.urlForBuy, infoOfClothes: json.predictions, user: { _id: userID }}), dataError: null });
+                    APIService.processingOnAPIOfDataModels({ req, res, method: clothesService.create({ name: req.body.name, photoName: req.file.filename, urlForBuy: req.body.urlForBuy, infoOfClothes: json, user: { _id: userID }}), dataError: null });
                 } catch (error) {
                     APIService.catchError({ res, req, error, dataError: null });
                 }
