@@ -12,7 +12,9 @@ section {
 }
 
 .popup {
+    overflow: scroll;
     max-width: 800px;
+    max-height: 95vh;
     width: 94%;
     background-color: darkgray;
     border: 3px solid black;

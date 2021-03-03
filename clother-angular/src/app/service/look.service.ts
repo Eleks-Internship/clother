@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { Look } from '../interface/look';
 import { environment } from 'src/environments/environment';
 import { Clothes } from '../interface/clothes';
+import { GeneratedLook } from '../interface/generated-look';
 
 @Injectable({
   providedIn: 'root'
@@ -22,8 +23,8 @@ export class LookService {
     return this.http.get<{ data: Look[] }>(environment.urlForServer + '/api/v1/looks');
   }
 
-  public getListRecommendations(info: { _id: string }): Observable<{ data: Look[] }> {
-    return this.http.post<{ data: Look[] }>(environment.urlForServer + '/api/v1/clothes/' + info._id + '/recommendations', {});
+  public getListRecommendations(info: { _id: string }): Observable<{ data: GeneratedLook[] }> {
+    return this.http.post<{ data: GeneratedLook[] }>(environment.urlForServer + '/api/v1/clothes/' + info._id + '/recommendations', {});
   }
 
   public update(info: { id: string, name: string, clothes: Clothes[] | { _id: string }[] }): Observable< { data: boolean }> {

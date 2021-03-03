@@ -1,7 +1,7 @@
 import { ObjectID } from "mongodb"
 
 export default interface File {
-    _id: ObjectID;
+    readonly _id: ObjectID;
     length: number;
     chunkSize: number;
     uploadDate: Date;

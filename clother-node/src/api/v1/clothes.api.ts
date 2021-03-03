@@ -106,8 +106,8 @@ router.post('/clothes/:id/recommendations', async (req: express.Request, res: ex
 
     const headers = {
         "Authorization": "Basic YWxhZGRpbjpvcGVuc2VzYW1lljrhebgervwekbflisufbewyufewfsngsdbgrrldngsufigbeurgb",
-        "DbName": "file",
-        "CollName": "uploads.files",
+        "DbName": "images",
+        "CollName": "urlsave",
     };
 
     request.post({

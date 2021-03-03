@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Clothes } from 'src/app/interface/clothes';
+import { GeneratedLook } from 'src/app/interface/generated-look';
 import { ClothesService } from 'src/app/service/clothes.service';
 import { LookService } from 'src/app/service/look.service';
 import { environment } from 'src/environments/environment';
@@ -17,6 +18,9 @@ export class ClothesMoreComponent implements OnInit {
 
   urlForServer: string;
   showClothesMode: boolean;
+  showGeneratedLook: boolean;
+
+  generatedLook: GeneratedLook[];
 
   constructor(
     private clothesService: ClothesService,
@@ -26,6 +30,7 @@ export class ClothesMoreComponent implements OnInit {
   ngOnInit(): void {
     this.urlForServer = environment.urlForServer;
     this.showClothesMode = false;
+    this.showGeneratedLook = false;
   }
 
   editClothes(): void {
@@ -55,6 +60,8 @@ export class ClothesMoreComponent implements OnInit {
     this.lookService.getListRecommendations({ _id: this.clothes._id }).subscribe(
       res => {
         console.log(res.data);
+        this.generatedLook = res.data;
+        this.showGeneratedLook = true;
       },
       error => console.log(error)
     );

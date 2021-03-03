@@ -30,6 +30,7 @@ import { EditClothesComponent } from './components/edit-clothes/edit-clothes.com
 import { CreateLookComponent } from './components/create-look/create-look.component';
 import { LookComponent } from './components/look/look.component';
 import { ClothesComponent } from './components/clothes/clothes.component';
+import { GeneratedLookComponent } from './components/generated-look/generated-look.component';
 
 
 @NgModule({
@@ -56,6 +57,7 @@ import { ClothesComponent } from './components/clothes/clothes.component';
     CreateLookComponent,
     LookComponent,
     ClothesComponent,
+    GeneratedLookComponent,
   ],
   imports: [
     BrowserModule,

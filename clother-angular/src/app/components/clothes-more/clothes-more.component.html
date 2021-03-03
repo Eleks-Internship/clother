@@ -17,17 +17,19 @@
                   </div>
         
                 <div class="flex-space-around">
-                    <button type="button" (click)="editClothes()">Редагувати</button>
-                    <button type="button" (click)="deleteClothes()">Видалити</button>
-                    <button id="close-btn" type="button" (click)="closedPopup()">Закрити</button>
+                    <button type="button" class="rounded mx-auto d-block bg-light" (click)="editClothes()">Редагувати</button>
+                    <button type="button" class="rounded mx-auto d-block bg-light" (click)="deleteClothes()">Видалити</button>
+                    <button id="close-btn" class="rounded mx-auto d-block bg-light" type="button" (click)="closedPopup()">Закрити</button>
                 </div>
 
                 <div class="flex-space-around">
-                  <button id="get-remondation-btn" type="button" (click)="getRecommendationLookList()">Зегенерувати луки</button>
-                  <button type="button" (click)="createLook()">Створити лук</button>
+                  <button id="get-remondation-btn" class="rounded mx-auto d-block bg-light" type="button" (click)="getRecommendationLookList()">Згенерувати луки</button>
+                  <button type="button" class="rounded mx-auto d-block bg-light" (click)="createLook()">Створити лук</button>
                 </div>
 
                 <app-edit-clothes [show]="showClothesMode" [clothes]="clothes" (closed)="showClothesMode = false"></app-edit-clothes>
+
+                <app-generated-look [show]="showGeneratedLook" [clothes]="clothes" [generatedLook]="generatedLook" (closed)="showGeneratedLook = false"></app-generated-look>
             </div>
         </div>
     </div>
