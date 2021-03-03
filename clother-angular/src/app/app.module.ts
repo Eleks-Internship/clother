@@ -27,6 +27,9 @@ import { CreateClothesComponent } from './components/create-clothes/create-cloth
 import { ClothesFormComponent } from './components/clothes-form/clothes-form.component';
 import { ClothesMoreComponent } from './components/clothes-more/clothes-more.component';
 import { EditClothesComponent } from './components/edit-clothes/edit-clothes.component';
+import { CreateLookComponent } from './components/create-look/create-look.component';
+import { LookComponent } from './components/look/look.component';
+import { ClothesComponent } from './components/clothes/clothes.component';
 
 
 @NgModule({
@@ -50,6 +53,9 @@ import { EditClothesComponent } from './components/edit-clothes/edit-clothes.com
     ClothesFormComponent,
     ClothesMoreComponent,
     EditClothesComponent,
+    CreateLookComponent,
+    LookComponent,
+    ClothesComponent,
   ],
   imports: [
     BrowserModule,
