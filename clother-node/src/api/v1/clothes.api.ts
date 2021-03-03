@@ -11,6 +11,7 @@ import FormData from 'form-data';
 import Clothes from '../../interface/object/clothes';
 import LogWithDatabaseService from '../../services/server-info/log/log_without_database.service';
 import LoginService from '../../services/auth/login.service';
+import ImageDatabase from '../../database/file/image.database';
 const request = require('request');
 
 const router: express.Router = express.Router();
@@ -114,10 +115,26 @@ router.post('/clothes/:id/recommendations', async (req: express.Request, res: ex
         url: "https://flask-models-n6vwx54efa-uc.a.run.app/recommend",
         headers: headers,
         json: clothes.infoOfClothes,
-    }, function optionalCallback(err: any, httpResponse: any, body: any, response: any) {
-        if (err) {
-            return console.error("upload failed:", err);
+    }, async function optionalCallback(error: any, httpResponse: any, body: { look1: any[], look2: any[],  look3:  any[] }, response: any) {
+        if (error) {
+            return APIService.catchError({ res, req, error, dataError: null });
         }
+
+        const imageDatabase: ImageDatabase = new ImageDatabase();
+        
+        try {
+            body.look1[1] = (await imageDatabase.get(new ObjectID(body.look1[1])))?.img;
+            body.look1[2] = (await imageDatabase.get(new ObjectID(body.look1[2])))?.img;
+
+            body.look2[1] = (await imageDatabase.get(new ObjectID(body.look2[1])))?.img;
+            body.look2[2] = (await imageDatabase.get(new ObjectID(body.look2[2])))?.img;
+
+            body.look3[1] = (await imageDatabase.get(new ObjectID(body.look3[1])))?.img;
+            body.look3[2] = (await imageDatabase.get(new ObjectID(body.look3[2])))?.img;
+        } catch (error) {
+            APIService.catchError({ res, req, error, dataError: null });
+        }
+
         res.json({ data: body });
     });
 });

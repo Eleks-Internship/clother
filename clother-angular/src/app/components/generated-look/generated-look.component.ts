@@ -1,7 +1,8 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { Clothes } from 'src/app/interface/clothes';
 import { GeneratedLook } from 'src/app/interface/generated-look';
+import { Image } from 'src/app/interface/image';
 import { HttpService } from 'src/app/service/http.service';
 import { ImageService } from 'src/app/service/image.service';
 import { environment } from 'src/environments/environment';
@@ -11,10 +12,12 @@ import { environment } from 'src/environments/environment';
   templateUrl: './generated-look.component.html',
   styleUrls: ['./generated-look.component.scss']
 })
-export class GeneratedLookComponent implements OnInit {
+export class GeneratedLookComponent implements OnInit, OnChanges {
   @Input() show: boolean;
   @Input() clothes: Clothes;
-  @Input() generatedLook: GeneratedLook[];
+  @Input() generatedLook: GeneratedLook;
+
+  look: string[] = [];
 
   @Output() closed = new EventEmitter<boolean>();
 
@@ -28,11 +31,34 @@ export class GeneratedLookComponent implements OnInit {
 
   ngOnInit(): void {
     this.urlForServer = environment.urlForServer;
-    console.log('Heloo from generated look');
+    console.log('Hell');
   }
 
-  transform(imageUrl: string): SafeResourceUrl {
-    return this.sanitizer.bypassSecurityTrustResourceUrl(this.base64Image);
+  ngOnChanges(): void {
+    // this.getImage(this.generatedLook.look1[1]);
+    // this.getImage(this.generatedLook.look1[2]);
+
+    // this.getImage(this.generatedLook.look2[1]);
+    // this.getImage(this.generatedLook.look2[2]);
+
+    // this.getImage(this.generatedLook.look3[1]);
+    // this.getImage(this.generatedLook.look3[2]);
+  }
+
+  transform(image: string): SafeResourceUrl {
+    // return this.sanitizer.bypassSecurityTrustResourceUrl(this.base64Image);
+
+    return this.sanitizer.bypassSecurityTrustResourceUrl('data:image/png;base64, ' + image);
+  }
+
+  getImage(imageUrl: string) {
+    this.imageService.get({ _id: imageUrl }).subscribe(
+      res => {
+        console.log(res);
+        // this.look.push(res.data.img);
+      },
+      error => this.httpService.processingOfStatus(error.status)
+    );
   }
 
   closedPopup(): void {

@@ -14,6 +14,6 @@ export class ImageService {
   ) { }
 
   public get(info: { _id: string }): Observable<{ data: Image | null }> {
-    return this.http.get<{ data: Image | null }>(environment.urlForServer + '/api/v1/image' + info._id);
+    return this.http.get<{ data: Image | null }>(environment.urlForServer + '/api/v1/image/' + info._id);
   }
 }

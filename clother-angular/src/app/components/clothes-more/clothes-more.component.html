@@ -29,7 +29,9 @@
 
                 <app-edit-clothes [show]="showClothesMode" [clothes]="clothes" (closed)="showClothesMode = false"></app-edit-clothes>
 
-                <app-generated-look [show]="showGeneratedLook" [clothes]="clothes" [generatedLook]="generatedLook" (closed)="showGeneratedLook = false"></app-generated-look>
+                <div *ngIf="showGeneratedLook">
+                  <app-generated-look [show]="showGeneratedLook" [clothes]="clothes" [generatedLook]="generatedLook" (closed)="showGeneratedLook = false"></app-generated-look>
+                </div>
             </div>
         </div>
     </div>

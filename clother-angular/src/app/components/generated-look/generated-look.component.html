@@ -2,22 +2,27 @@
     <div class="center-1">
         <div class="center-2">
             <div class="center-3 popup">
-                <div>
-                    <img src="{{ urlForServer }}/api/v1/clothes/{{ clothes._id }}/image" alt="">
-                    <img [src]="transform(generatedLook.look1[1])">
-                    <img [src]="transform(generatedLook.look1[2])">
-                </div>
-
-                <div>
-                    <img src="{{ urlForServer }}/api/v1/clothes/{{ clothes._id }}/image" alt="">
-                    <img [src]="transform(generatedLook.look2[1])">
-                    <img [src]="transform(generatedLook.look2[2])">
-                </div>
-
-                <div>
-                    <img src="{{ urlForServer }}/api/v1/clothes/{{ clothes._id }}/image" alt="">
-                    <img [src]="transform(generatedLook.look3[1])">
-                    <img [src]="transform(generatedLook.look3[2])">
+                <div class="grid-3">
+                    <div>
+                        <h3>Look 1</h3>
+                        <img src="{{ urlForServer }}/api/v1/clothes/{{ clothes._id }}/image" alt="">
+                        <img [src]="transform(generatedLook.look1[1])">
+                        <img [src]="transform(generatedLook.look1[2])">
+                    </div>
+    
+                    <div>
+                        <h3>Look 2</h3>
+                        <img src="{{ urlForServer }}/api/v1/clothes/{{ clothes._id }}/image" alt="">
+                        <img [src]="transform(generatedLook.look2[1])">
+                        <img [src]="transform(generatedLook.look2[2])">
+                    </div>
+    
+                    <div>
+                        <h3>Look 3</h3>
+                        <img src="{{ urlForServer }}/api/v1/clothes/{{ clothes._id }}/image" alt="">
+                        <img [src]="transform(generatedLook.look3[1])">
+                        <img [src]="transform(generatedLook.look3[2])">
+                    </div>
                 </div>
 
                 <button id="close-btn" class="rounded mx-auto d-block bg-light" type="button" (click)="closedPopup()">Закрити</button>
