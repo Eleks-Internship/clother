@@ -14,7 +14,7 @@ export class LookService {
     private http: HttpClient
   ) { }
 
-  public create(info: { name: string, clothes: Clothes[] | { _id: string }[], user: { _id: string } }): Observable<{ data: Look | null }> {
+  public create(info: { name: string, clothes: Clothes[] | { _id: string }[] } | FormData): Observable<{ data: Look | null }> {
     return this.http.post<{ data: Look | null }>(environment.urlForServer + '/api/v1/looks', info);
   }
 

@@ -18,11 +18,14 @@
         
                 <div class="flex-space-around">
                     <button type="button" (click)="editClothes()">Редагувати</button>
-                    <button id="get-remondation-btn" type="button" (click)="getRecommendationLookList()">Луки</button>
                     <button type="button" (click)="deleteClothes()">Видалити</button>
+                    <button id="close-btn" type="button" (click)="closedPopup()">Закрити</button>
                 </div>
 
-                <button id="close-btn" type="button" (click)="closedPopup()">Закрити</button>
+                <div class="flex-space-around">
+                  <button id="get-remondation-btn" type="button" (click)="getRecommendationLookList()">Зегенерувати луки</button>
+                  <button type="button" (click)="createLook()">Створити лук</button>
+                </div>
 
                 <app-edit-clothes [show]="showClothesMode" [clothes]="clothes" (closed)="showClothesMode = false"></app-edit-clothes>
             </div>
