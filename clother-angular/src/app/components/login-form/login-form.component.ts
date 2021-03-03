@@ -1,5 +1,6 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login-form',
@@ -12,6 +13,7 @@ export class LoginFormComponent implements OnInit {
   @Output() send = new EventEmitter<{ email: string, password: string }>();
 
   constructor(
+    private router: Router,
     private formBuilder: FormBuilder
   ) { }
 
@@ -24,5 +26,9 @@ export class LoginFormComponent implements OnInit {
 
   sendForm(info: { email: string, password: string }): void {
     this.send.emit(info);
+  }
+
+  redirect(): void {
+    this.router.navigate(['sign-up']);
   }
 }
